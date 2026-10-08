@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Test profiles & caches
+chrome-test-profile/
+.cache/
+*.log
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Environment variables & secrets
+.env
+.env.local
+.env.*.local
+
+# Local server scratch data
+data/
+
+# Scratch screenshots & debug scripts
+shot_*.png
+preview_*.png
+test-*.js
+blazebyte-deploy.zip
+index.prev.html
+index.anime-v1.html

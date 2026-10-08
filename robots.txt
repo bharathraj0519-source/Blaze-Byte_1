@@ -1,0 +1,21 @@
+# BLAZEBYTE STUDIO — ROBOTS.TXT
+# https://www.blazebyte.shop/
+
+User-agent: *
+Allow: /
+Allow: /assets/
+Allow: /css/
+Allow: /js/
+
+# Disallow private and administrative assets
+Disallow: /chrome-test-profile/
+Disallow: /dist/
+Disallow: /*.zip$
+Disallow: /*.log$
+Disallow: /test-*.js$
+Disallow: /shot_*.png$
+Disallow: /preview_*.png$
+
+# Crawl Delay & Sitemap
+Crawl-delay: 1
+Sitemap: https://www.blazebyte.shop/sitemap.xml

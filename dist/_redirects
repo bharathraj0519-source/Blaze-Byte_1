@@ -1,0 +1,4 @@
+# Netlify & Cloudflare Pages Redirects
+/home                /                     301
+/services            /web-development.html 301
+/portfolio           /our-work.html        301

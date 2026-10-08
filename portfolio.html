@@ -1,0 +1,3029 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#060818">
+  <meta name="description" content="BlazeByte Studio — High-performance web portfolio, interactive digital platforms, and autonomous concepts crafted with precision engineering and Sword Art Online anime aesthetics.">
+  <link rel="canonical" href="https://blazebyte.store/portfolio.html">
+  <title>BlazeByte Studio // Cardinal Web Portfolio &amp; Guild HQ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lateef:wght@400;500;600;700;800&family=Rajdhani:wght@500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      /* SAO Twilight & Brand Harmonized Palette */
+      --bg-deep: #030612;
+      --bg-ink: #070c1e;
+      --bg-surface: #0b132b;
+      --bg-panel: rgba(11, 19, 43, 0.78);
+      --sao-cyan: #00f5ff;
+      --sao-mint: #4ef2d2;
+      --sao-gold: #ffc837;
+      --sao-sunset: #ff9f43;
+      --sao-rose: #ff4b91;
+      --sao-magenta: #f72585;
+      --sao-violet: #8338ec;
+      --sao-green: #00ff88;
+      --text-main: #f5f8fc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --border-cyan: rgba(0, 245, 255, 0.32);
+      --border-sunset: rgba(255, 159, 67, 0.35);
+      --border-rose: rgba(255, 75, 145, 0.35);
+      --border-violet: rgba(131, 56, 236, 0.3);
+      --font-hud: "Rajdhani", sans-serif;
+      --font-mono: "Share Tech Mono", monospace;
+      --font-body: "Barlow", sans-serif;
+      --wrap: min(1320px, calc(100% - 48px));
+      --spot-x: 50%;
+      --spot-y: 50%;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+    body {
+      min-width: 320px;
+      background: var(--bg-deep);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Ambient Sunset-Twilight Cyber Grid */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 10%, rgba(255, 75, 145, 0.15), transparent 45%),
+        radial-gradient(circle at 85% 35%, rgba(255, 200, 55, 0.12), transparent 40%),
+        radial-gradient(circle at 12% 55%, rgba(0, 245, 255, 0.1), transparent 42%),
+        radial-gradient(circle at 75% 85%, rgba(131, 56, 236, 0.15), transparent 45%),
+        linear-gradient(180deg, #030612 0%, #070c1e 45%, #050816 100%);
+    }
+
+    /* Hexagonal & Star Coordinate Grid */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.14;
+      background-image: 
+        radial-gradient(var(--sao-cyan) 1px, transparent 1px),
+        linear-gradient(rgba(255, 200, 55, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
+      background-size: 36px 36px, 36px 36px, 36px 36px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+    img { max-width: 100%; display: block; }
+    ::selection { background: var(--sao-rose); color: #fff; }
+    :focus-visible {
+      outline: 2px solid var(--sao-cyan);
+      outline-offset: 4px;
+      box-shadow: 0 0 14px var(--sao-cyan);
+    }
+    .wrap { width: var(--wrap); margin-inline: auto; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
+    /* ==========================================================================
+       1. "LINK START" KINETIC INTRO (WITH NEW LOGO & INSTANT SKIP)
+       ========================================================================== */
+    .intro {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at center, #0d1533 0%, #02050e 85%);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.65s ease;
+      overflow: hidden;
+    }
+    .intro.is-gone { opacity: 0; visibility: hidden; pointer-events: none; }
+    .intro-grid {
+      position: absolute;
+      inset: -50%;
+      background-image: linear-gradient(rgba(255, 75, 145, 0.08) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(0, 245, 255, 0.08) 1px, transparent 1px);
+      background-size: 55px 55px;
+      transform: perspective(600px) rotateX(65deg);
+      animation: intro-grid-move 14s linear infinite;
+    }
+    @keyframes intro-grid-move { 0% { transform: perspective(600px) rotateX(65deg) translateY(0); } 100% { transform: perspective(600px) rotateX(65deg) translateY(55px); } }
+
+    .intro-content {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      justify-items: center;
+      text-align: center;
+      gap: 16px;
+      padding: 30px;
+    }
+    .intro-reticle {
+      position: relative;
+      width: clamp(140px, 18vw, 195px);
+      height: clamp(140px, 18vw, 195px);
+      display: grid;
+      place-items: center;
+    }
+    .intro-reticle-ring {
+      position: absolute;
+      inset: 0;
+      border: 1px dashed var(--sao-gold);
+      border-radius: 50%;
+      animation: spin-slow 18s linear infinite;
+    }
+    .intro-reticle-ring::before,
+    .intro-reticle-ring::after {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border: 2px solid transparent;
+      border-top-color: var(--sao-rose);
+      border-bottom-color: var(--sao-cyan);
+      border-radius: 50%;
+      animation: spin-reverse 9s linear infinite;
+    }
+    @keyframes spin-slow { to { transform: rotate(360deg); } }
+    @keyframes spin-reverse { to { transform: rotate(-360deg); } }
+
+    .intro-logo-box {
+      width: 76%;
+      height: 76%;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 2px solid var(--sao-cyan);
+      box-shadow: 0 0 30px rgba(255, 75, 145, 0.5), inset 0 0 15px rgba(0, 245, 255, 0.3);
+      animation: logo-pulse 2.2s ease-in-out infinite alternate;
+    }
+    .intro-logo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    @keyframes logo-pulse {
+      0% { transform: scale(0.96); filter: drop-shadow(0 0 16px rgba(0, 245, 255, 0.6)); }
+      100% { transform: scale(1.03); filter: drop-shadow(0 0 34px rgba(255, 75, 145, 0.9)); }
+    }
+
+    .intro-telemetry {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.24em;
+      color: var(--sao-gold);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .intro-telemetry::before, .intro-telemetry::after {
+      content: "✦";
+      font-size: 10px;
+      color: var(--sao-cyan);
+    }
+
+    .kinetic-word {
+      font-family: var(--font-hud);
+      font-size: clamp(28px, 4.5vw, 48px);
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #fff;
+      display: flex;
+      overflow: hidden;
+      text-shadow: 0 0 24px rgba(255, 75, 145, 0.6);
+    }
+    .kinetic-word span {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(120%) skewX(-15deg);
+      animation: letter-snap 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: calc(var(--i) * 45ms + 150ms);
+    }
+    @keyframes letter-snap { to { opacity: 1; transform: translateY(0) skewX(0); } }
+
+    .intro-line {
+      width: 220px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.12);
+      position: relative;
+      overflow: hidden;
+      clip-path: polygon(0 0, 96% 0, 100% 100%, 4% 100%);
+    }
+    .intro-line::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, var(--sao-gold), var(--sao-rose), var(--sao-cyan));
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: fill-bar 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s forwards;
+    }
+    @keyframes fill-bar { to { transform: scaleX(1); } }
+
+    .intro-skip {
+      margin-top: 10px;
+      padding: 7px 18px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      border: 1px solid var(--border-cyan);
+      border-radius: 4px;
+      background: rgba(0, 245, 255, 0.06);
+      clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+      transition: all 0.25s ease;
+    }
+    .intro-skip:hover {
+      color: #fff;
+      border-color: var(--sao-gold);
+      background: rgba(255, 200, 55, 0.2);
+      box-shadow: 0 0 18px rgba(255, 200, 55, 0.5);
+    }
+
+    /* ==========================================================================
+       2. TOPBAR HUD WITH SECTION SHIFT GLOW & SPOTLIGHT
+       ========================================================================== */
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 14px 0;
+      transition: background 0.3s, border-color 0.3s, backdrop-filter 0.3s;
+    }
+    .topbar.is-scrolled {
+      background: rgba(5, 10, 26, 0.9);
+      border-bottom: 1px solid var(--border-cyan);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 75, 145, 0.08);
+    }
+    .nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    /* Player Avatar with New Uploaded Logo */
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .brand-avatar {
+      position: relative;
+      width: 48px;
+      height: 48px;
+      border: 1px solid var(--sao-gold);
+      border-radius: 10px;
+      background: #080f24;
+      overflow: hidden;
+      box-shadow: 0 0 16px rgba(255, 200, 55, 0.4), inset 0 0 8px rgba(0, 245, 255, 0.3);
+      flex: none;
+    }
+    .brand-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .brand-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .brand-name {
+      font-family: var(--font-hud);
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .brand-name em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--sao-gold), var(--sao-rose));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+    .brand-hp-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 2px;
+    }
+    .hp-gauge {
+      width: 85px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hp-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      background: linear-gradient(90deg, var(--sao-green), var(--sao-cyan));
+      box-shadow: 0 0 8px var(--sao-green);
+    }
+    .hp-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--sao-mint);
+    }
+
+    /* SAO Floating Spotlight Menu */
+    .spotlight-nav {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 5px 8px;
+      border: 1px solid var(--border-cyan);
+      background: radial-gradient(160px circle at var(--spot-x) var(--spot-y), rgba(0, 245, 255, 0.22), transparent 75%),
+                  rgba(7, 14, 32, 0.88);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), inset 0 0 16px rgba(0, 245, 255, 0.06);
+      backdrop-filter: blur(16px);
+      clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px);
+    }
+    .spotlight-nav a {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 15px;
+      font-family: var(--font-hud);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #9cb1ce;
+      border-radius: 4px;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .spotlight-nav a span.sao-bullet {
+      font-size: 8px;
+      color: var(--sao-cyan);
+      opacity: 0.5;
+      transition: transform 0.25s, color 0.25s, opacity 0.25s;
+    }
+    .spotlight-nav a:hover {
+      color: #fff;
+      background: rgba(0, 245, 255, 0.12);
+    }
+
+    /* SECTION SHIFT GLOW EFFECT (ACTIVE LINK GLOW) */
+    .spotlight-nav a.is-active-section {
+      color: #fff;
+      background: linear-gradient(135deg, rgba(0, 245, 255, 0.22), rgba(255, 75, 145, 0.18));
+      border: 1px solid rgba(0, 245, 255, 0.6);
+      box-shadow: 0 0 18px rgba(0, 245, 255, 0.45), inset 0 0 10px rgba(0, 245, 255, 0.2);
+      text-shadow: 0 0 10px rgba(0, 245, 255, 0.7);
+    }
+    .spotlight-nav a.is-active-section span.sao-bullet {
+      opacity: 1;
+      transform: scale(1.6);
+      color: var(--sao-gold);
+      text-shadow: 0 0 8px var(--sao-gold);
+    }
+
+    /* Topbar Right Controls (Sound SFX + Commission Button) */
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .sound-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.04);
+      transition: all 0.2s ease;
+    }
+    .sound-toggle:hover {
+      border-color: var(--sao-gold);
+      color: var(--sao-gold);
+      box-shadow: 0 0 12px rgba(255, 200, 55, 0.3);
+    }
+    .sound-toggle.is-active {
+      border-color: var(--sao-mint);
+      color: var(--sao-mint);
+      background: rgba(78, 242, 210, 0.12);
+    }
+
+    /* Shimmer Button (Sword Skill Activated Look) */
+    .animated-button {
+      position: relative;
+      isolation: isolate;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 46px;
+      padding: 0 22px;
+      font-family: var(--font-hud);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fff;
+      border: 1px solid var(--sao-gold);
+      background: linear-gradient(115deg, #182859 0%, #4a154b 60%, #a21c54 100%);
+      box-shadow: 0 0 0 1px rgba(255, 200, 55, 0.25), 0 0 24px rgba(255, 75, 145, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+      clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .animated-button::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: -50% auto -50% -40%;
+      width: 35%;
+      transform: rotate(25deg);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+      transition: left 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .animated-button::after {
+      content: "✦";
+      position: absolute;
+      right: 10px;
+      top: 5px;
+      font-size: 9px;
+      color: var(--sao-gold);
+      text-shadow: 0 0 8px var(--sao-gold);
+      opacity: 0.8;
+      transition: transform 0.3s;
+    }
+    .animated-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 0 2px var(--sao-gold), 0 0 35px rgba(255, 200, 55, 0.5);
+    }
+    .animated-button:hover::before { left: 130%; }
+    .animated-button:hover::after { transform: rotate(90deg) scale(1.3); }
+
+    .menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--border-cyan);
+      border-radius: 6px;
+      background: rgba(0, 245, 255, 0.08);
+      font-size: 20px;
+      color: var(--sao-cyan);
+      cursor: pointer;
+    }
+
+    /* ==========================================================================
+       3. INTERACTIVE SCROLL SWORD EFFECT (MOVING & STRIKING IN THE MID)
+       ========================================================================== */
+    .scroll-sword-hud {
+      position: fixed;
+      right: 28px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .sword-track {
+      width: 3px;
+      height: 240px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 245, 255, 0.2);
+    }
+    .sword-track-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 0%;
+      background: linear-gradient(180deg, var(--sao-cyan), var(--sao-rose), var(--sao-gold));
+      box-shadow: 0 0 12px var(--sao-cyan);
+      transition: height 0.1s linear;
+    }
+    .sword-carrier {
+      position: absolute;
+      left: 50%;
+      top: 0%;
+      transform: translate(-50%, -50%);
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      filter: drop-shadow(0 0 10px var(--sao-cyan));
+      transition: top 0.1s linear, transform 0.25s ease;
+    }
+    .sword-svg-blade {
+      width: 28px;
+      height: 28px;
+      transition: transform 0.2s;
+    }
+    .sword-floor-badge {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--sao-gold);
+      background: rgba(4, 9, 22, 0.9);
+      padding: 3px 6px;
+      border: 1px solid var(--border-cyan);
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+
+    /* Full-Screen Mid-Strike Flash Animation on Section Threshold */
+    .sword-strike-flash {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      display: none;
+    }
+    .sword-strike-flash.is-striking {
+      display: block;
+      animation: strike-sequence 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .strike-beam {
+      position: absolute;
+      top: 50%;
+      left: -20%;
+      width: 140%;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--sao-cyan) 20%, #fff 50%, var(--sao-rose) 80%, transparent);
+      box-shadow: 0 0 30px #fff, 0 0 60px var(--sao-cyan);
+      transform: translateY(-50%) rotate(-12deg);
+    }
+    @keyframes strike-sequence {
+      0% { opacity: 0; transform: scaleX(0.2); }
+      30% { opacity: 1; transform: scaleX(1); }
+      100% { opacity: 0; transform: scaleX(1.3); }
+    }
+
+    /* ==========================================================================
+       4. HERO SECTION: 3D CARDINAL HOLOGRAPHIC CONSTELLATION
+       ========================================================================== */
+    .hero {
+      position: relative;
+      min-height: min(940px, 100svh);
+      display: grid;
+      align-items: center;
+      padding: 140px 0 80px;
+      isolation: isolate;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 0.96fr 1.04fr;
+      align-items: center;
+      gap: 36px;
+    }
+    .hero-copy {
+      position: relative;
+      z-index: 4;
+      max-width: 640px;
+    }
+    .sao-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.16em;
+      color: var(--sao-gold);
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-left: 3px solid var(--sao-gold);
+      background: rgba(255, 200, 55, 0.08);
+    }
+    .hero h1 {
+      margin: 20px 0 16px;
+      font-family: var(--font-hud);
+      font-size: clamp(48px, 6vw, 94px);
+      font-weight: 800;
+      line-height: 0.9;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+    }
+    .hero h1 .line { display: block; }
+    .hero h1 .line-outline {
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--sao-cyan);
+      text-shadow: 0 0 25px rgba(0, 245, 255, 0.4);
+      padding-left: clamp(14px, 2.8vw, 36px);
+      white-space: nowrap;
+    }
+    .hero-lede {
+      font-size: 19px;
+      line-height: 1.55;
+      color: #c0d0e6;
+      margin-top: 22px;
+      max-width: 530px;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+    .secondary-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-hud);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #d6e2f4;
+      padding: 8px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+      transition: all 0.2s;
+    }
+    .secondary-link span { color: var(--sao-cyan); transition: transform 0.2s; }
+    .secondary-link:hover {
+      border-color: var(--sao-cyan);
+      color: #fff;
+      box-shadow: 0 0 16px rgba(0, 245, 255, 0.3);
+    }
+    .secondary-link:hover span { transform: translate(3px, -3px); }
+
+    .hero-telemetry-strip {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-top: 48px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .hero-telemetry-strip strong {
+      font-family: var(--font-hud);
+      font-size: 26px;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(255, 200, 55, 0.4);
+    }
+    .hero-telemetry-strip i.sep {
+      width: 1px;
+      height: 24px;
+      background: var(--border-cyan);
+    }
+
+    /* 3D Dimensional Interface Constellation (SAO Console) */
+    .browser-stage {
+      position: relative;
+      min-height: 580px;
+      perspective: 1200px;
+      transform-style: preserve-3d;
+      display: grid;
+      place-items: center;
+    }
+    .sao-orbit-rings {
+      position: absolute;
+      width: min(450px, 92%);
+      aspect-ratio: 1;
+      border: 1px dashed rgba(255, 200, 55, 0.3);
+      border-radius: 50%;
+      transform: rotateX(68deg) rotateZ(-20deg);
+      box-shadow: 0 0 60px rgba(0, 245, 255, 0.12), inset 0 0 40px rgba(255, 75, 145, 0.12);
+      pointer-events: none;
+      animation: orbit-rotate 35s linear infinite;
+    }
+    .sao-orbit-rings::after {
+      content: "";
+      position: absolute;
+      inset: -14%;
+      border: 1px solid rgba(255, 75, 145, 0.25);
+      border-radius: 50%;
+      transform: rotateY(45deg);
+    }
+    @keyframes orbit-rotate { to { transform: rotateX(68deg) rotateZ(340deg); } }
+
+    /* The Main SAO Holographic Window */
+    .browser-window {
+      position: relative;
+      width: min(580px, 94%);
+      height: 380px;
+      border: 1px solid var(--border-cyan);
+      background: linear-gradient(135deg, rgba(8, 20, 48, 0.95), rgba(4, 9, 22, 0.94));
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 45px rgba(0, 245, 255, 0.25), inset 0 0 24px rgba(255, 75, 145, 0.08);
+      clip-path: polygon(18px 0, calc(100% - 18px) 0, 100% 18px, 100% calc(100% - 18px), calc(100% - 18px) 100%, 18px 100%, 0 calc(100% - 18px), 0 18px);
+      overflow: hidden;
+      transform: rotateY(-10deg) rotateX(4deg);
+      transition: transform 0.2s ease-out;
+      animation: console-float 7s ease-in-out infinite;
+    }
+    @keyframes console-float {
+      0%, 100% { margin-top: 0; }
+      50% { margin-top: -12px; }
+    }
+
+    .window-header {
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      background: rgba(0, 245, 255, 0.08);
+      border-bottom: 1px solid var(--border-cyan);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--sao-cyan);
+      letter-spacing: 0.08em;
+    }
+    .window-header-dots {
+      display: flex;
+      gap: 6px;
+    }
+    .window-header-dots span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--sao-cyan);
+      box-shadow: 0 0 6px var(--sao-cyan);
+    }
+    .window-header-dots span:nth-child(2) { background: var(--sao-gold); box-shadow: 0 0 6px var(--sao-gold); }
+    .window-header-dots span:nth-child(3) { background: var(--sao-rose); box-shadow: 0 0 6px var(--sao-rose); }
+    .window-address {
+      padding: 2px 14px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(0, 245, 255, 0.2);
+      border-radius: 3px;
+    }
+
+    .window-body {
+      height: calc(100% - 42px);
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 16px;
+      background-image: 
+        radial-gradient(ellipse at 70% 70%, rgba(255, 75, 145, 0.12), transparent 45%),
+        linear-gradient(rgba(0, 245, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 245, 255, 0.04) 1px, transparent 1px);
+      background-size: auto, 24px 24px, 24px 24px;
+    }
+    .mock-hud-kicker {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--sao-gold);
+      letter-spacing: 0.16em;
+      margin-bottom: 6px;
+    }
+    .mock-hud-title {
+      font-family: var(--font-hud);
+      font-size: clamp(34px, 4vw, 44px);
+      font-weight: 800;
+      line-height: 0.95;
+      color: #fff;
+      text-transform: uppercase;
+    }
+    .mock-hud-title i {
+      display: block;
+      color: var(--sao-cyan);
+      font-style: normal;
+      text-shadow: 0 0 12px rgba(0, 245, 255, 0.5);
+    }
+    .mock-hud-metrics {
+      margin-top: 14px;
+      display: grid;
+      gap: 7px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+      padding-bottom: 2px;
+    }
+    .metric-row span:last-child { color: var(--sao-cyan); font-weight: 700; }
+
+    .holo-art-wrapper {
+      position: relative;
+      display: grid;
+      place-items: center;
+      height: 220px;
+    }
+    .holo-crystal {
+      width: 130px;
+      height: 130px;
+      border: 1px solid var(--sao-gold);
+      background: radial-gradient(circle at center, rgba(255, 200, 55, 0.35) 0%, rgba(255, 75, 145, 0.2) 50%, transparent 75%);
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      box-shadow: 0 0 35px rgba(255, 200, 55, 0.5);
+      animation: crystal-pulse 4s ease-in-out infinite;
+      position: relative;
+    }
+    .holo-crystal::after {
+      content: "";
+      position: absolute;
+      inset: 15%;
+      border: 1px dashed var(--sao-cyan);
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      animation: spin-slow 10s linear infinite reverse;
+    }
+    @keyframes crystal-pulse {
+      0%, 100% { transform: scale(0.96) rotate(0deg); }
+      50% { transform: scale(1.04) rotate(15deg); filter: drop-shadow(0 0 20px var(--sao-gold)); }
+    }
+
+    .orbit-widget {
+      position: absolute;
+      z-index: 5;
+      padding: 8px 14px;
+      font-family: var(--font-hud);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff;
+      border: 1px solid var(--border-cyan);
+      background: rgba(8, 18, 42, 0.92);
+      box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+      backdrop-filter: blur(10px);
+      clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+    }
+    .orbit-widget.w1 {
+      top: 14%;
+      left: -4%;
+      color: var(--sao-gold);
+      border-color: rgba(255, 200, 55, 0.4);
+    }
+    .orbit-widget.w2 {
+      top: 8%;
+      right: -2%;
+      color: var(--sao-cyan);
+    }
+    .orbit-widget.w3 {
+      bottom: 10%;
+      right: 4%;
+      color: var(--sao-rose);
+      border-color: rgba(255, 75, 145, 0.4);
+    }
+
+    /* ==========================================================================
+       5. SECTION HEADINGS & FLIP-TEXT REVEAL
+       ========================================================================== */
+    .section { padding: 110px 0; position: relative; }
+    .section-head {
+      display: grid;
+      grid-template-columns: 1fr minmax(240px, 380px);
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+    .section-head h2 {
+      margin: 10px 0 0;
+      font-family: var(--font-hud);
+      font-size: clamp(44px, 5.5vw, 76px);
+      font-weight: 800;
+      line-height: 0.92;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+    }
+    .section-head p {
+      color: var(--text-muted);
+      font-size: 17px;
+      margin-bottom: 4px;
+    }
+
+    .flip-word {
+      display: inline-block;
+      transform: translateY(70%) rotateX(-75deg);
+      opacity: 0;
+      filter: blur(5px);
+      transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s, filter 0.45s;
+      transition-delay: calc(var(--char-index) * 20ms);
+    }
+    .is-flipped .flip-word {
+      transform: translateY(0) rotateX(0);
+      opacity: 1;
+      filter: blur(0);
+    }
+
+    /* ==========================================================================
+       6. SELECTED WORK: 3D PERSPECTIVE CAROUSEL [QUEST ARCHIVE]
+       ========================================================================== */
+    .work-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+      border-top: 1px solid var(--border-cyan);
+      border-bottom: 1px solid var(--border-cyan);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .work-status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--sao-green);
+      box-shadow: 0 0 12px var(--sao-green);
+    }
+    .carousel-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    .carousel-arrow {
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--border-cyan);
+      background: rgba(0, 245, 255, 0.05);
+      font-family: var(--font-hud);
+      font-size: 20px;
+      color: var(--sao-cyan);
+      clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+      transition: all 0.2s ease;
+      display: grid;
+      place-items: center;
+    }
+    .carousel-arrow:hover {
+      background: rgba(0, 245, 255, 0.2);
+      border-color: var(--sao-cyan);
+      box-shadow: 0 0 16px rgba(0, 245, 255, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .perspective-carousel {
+      position: relative;
+      height: 610px;
+      margin-top: 24px;
+      overflow: hidden;
+      touch-action: pan-y;
+      perspective: 1400px;
+    }
+    .perspective-carousel::before,
+    .perspective-carousel::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 12%;
+      z-index: 5;
+      pointer-events: none;
+    }
+    .perspective-carousel::before { left: 0; background: linear-gradient(90deg, var(--bg-deep), transparent); }
+    .perspective-carousel::after { right: 0; background: linear-gradient(-90deg, var(--bg-deep), transparent); }
+
+    .project-slide {
+      position: absolute;
+      left: 50%;
+      top: 20px;
+      width: min(650px, 74vw);
+      height: 520px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(-50%) scale(0.85);
+      transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s, filter 0.5s;
+      filter: blur(3px);
+      pointer-events: none;
+    }
+    .project-slide.is-active {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+      filter: none;
+      z-index: 3;
+      transform: translateX(-50%) scale(1);
+    }
+    .project-slide.is-near {
+      visibility: visible;
+      opacity: 0.65;
+      pointer-events: auto;
+      z-index: 2;
+      filter: blur(0.8px);
+    }
+    .project-slide.is-far {
+      visibility: hidden;
+      opacity: 0;
+      transform: translateX(-50%) scale(0.7);
+    }
+
+    .project-visual {
+      position: relative;
+      height: 375px;
+      padding: 14px;
+      border: 1px solid var(--border-cyan);
+      background: linear-gradient(145deg, rgba(14, 28, 56, 0.88), rgba(6, 12, 26, 0.92));
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 245, 255, 0.05);
+      clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+      overflow: hidden;
+    }
+    .project-browser {
+      height: 100%;
+      border: 1px solid rgba(0, 245, 255, 0.25);
+      background: #080f1e;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-chrome {
+      height: 34px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 12px;
+      background: rgba(0, 245, 255, 0.06);
+      border-bottom: 1px solid rgba(0, 245, 255, 0.15);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--sao-cyan);
+    }
+    .project-chrome i {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--sao-cyan);
+    }
+    .project-chrome i:nth-child(2) { background: var(--sao-gold); }
+    .project-chrome i:nth-child(3) { background: var(--sao-rose); }
+    .project-rank-tag {
+      margin-left: auto;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--sao-gold);
+    }
+
+    .project-screen {
+      flex: 1;
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-screen-grid {
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+      z-index: 2;
+    }
+    .project-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sao-cyan);
+      margin-bottom: 8px;
+    }
+    .project-slide[data-kind="concept"] .project-badge {
+      color: var(--sao-gold);
+    }
+    .project-title {
+      font-family: var(--font-hud);
+      font-size: clamp(30px, 3.8vw, 48px);
+      font-weight: 800;
+      line-height: 0.92;
+      color: #fff;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .project-copy {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #b5c7dd;
+      max-width: 280px;
+    }
+
+    .project-holo-disc {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 170px;
+    }
+    .holo-disc-core {
+      width: 140px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.9), var(--card-a, var(--sao-cyan)) 20%, var(--card-b, var(--sao-violet)) 60%, transparent 75%);
+      filter: drop-shadow(0 0 25px var(--card-a, var(--sao-cyan)));
+    }
+    .holo-disc-frame {
+      position: absolute;
+      width: 82%;
+      height: 72%;
+      border: 1px solid rgba(0, 245, 255, 0.5);
+      background: rgba(0, 245, 255, 0.05);
+      backdrop-filter: blur(6px);
+      transform: rotate(6deg);
+      clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+    }
+
+    .project-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 16px 4px 10px;
+      transition: opacity 0.35s ease;
+    }
+    .project-slide:not(.is-active) .project-meta,
+    .project-slide:not(.is-active) .project-launch-btn,
+    .project-slide:not(.is-active) .concept-note {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .project-meta h3 {
+      font-family: var(--font-hud);
+      font-size: 24px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .project-meta p {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .project-kind-chip {
+      padding: 4px 10px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--border-cyan);
+      border-radius: 3px;
+      background: rgba(0, 245, 255, 0.08);
+      color: var(--sao-cyan);
+    }
+    .project-slide[data-kind="concept"] .project-kind-chip {
+      border-color: rgba(255, 194, 51, 0.4);
+      background: rgba(255, 194, 51, 0.08);
+      color: var(--sao-gold);
+    }
+
+    .project-launch-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: 4px;
+      font-family: var(--font-hud);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sao-cyan);
+      transition: all 0.2s;
+    }
+    .project-launch-btn:hover {
+      color: #fff;
+      text-shadow: 0 0 10px var(--sao-cyan);
+      transform: translateX(4px);
+    }
+
+    .project-slide[data-project="store"] { --card-a: #00f5ff; --card-b: #1d4ed8; }
+    .project-slide[data-project="store"] .project-screen {
+      background: radial-gradient(circle at 80% 80%, rgba(0, 245, 255, 0.2), transparent 45%), linear-gradient(135deg, #091730, #040914);
+    }
+    .project-slide[data-project="studio"] { --card-a: #ff4b91; --card-b: #8338ec; }
+    .project-slide[data-project="studio"] .project-screen {
+      background: radial-gradient(circle at 80% 50%, rgba(255, 75, 145, 0.22), transparent 45%), linear-gradient(135deg, #180d28, #070412);
+    }
+    .project-slide[data-project="info"] { --card-a: #ffc837; --card-b: #0ea5e9; }
+    .project-slide[data-project="info"] .project-screen {
+      background: radial-gradient(circle at 80% 70%, rgba(255, 200, 55, 0.2), transparent 45%), linear-gradient(135deg, #1b1607, #070814);
+    }
+    .project-slide[data-project="local"] { --card-a: #ffaa5a; --card-b: #f43f5e; }
+    .project-slide[data-project="local"] .project-screen {
+      background: radial-gradient(circle at 80% 60%, rgba(255, 170, 90, 0.18), transparent 45%), linear-gradient(135deg, #24141d, #0d060c);
+    }
+    .project-slide[data-project="flow"] { --card-a: #00ff88; --card-b: #8b5cf6; }
+    .project-slide[data-project="flow"] .project-screen {
+      background: radial-gradient(circle at 80% 65%, rgba(0, 255, 136, 0.18), transparent 45%), linear-gradient(135deg, #071f1a, #050d18);
+    }
+
+    .project-slide.is-near {
+      transform: translateX(calc(-50% + var(--slide-x, 0%))) translateY(18px) rotateY(var(--slide-rotate, 0deg)) scale(0.86);
+    }
+
+    /* ==========================================================================
+       7. CONCEPTS SECTION: EXPANDED CARDINAL R&D LAB (DEEP ARCHITECTURE DETAILS)
+       ========================================================================== */
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 24px;
+    }
+    .concept-panel {
+      position: relative;
+      padding: 30px;
+      border: 1px solid var(--border-cyan);
+      background: linear-gradient(140deg, rgba(8, 20, 44, 0.75), rgba(4, 9, 22, 0.85));
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45), inset 0 0 16px rgba(0, 245, 255, 0.04);
+      clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    }
+    .concept-panel:hover {
+      transform: translateY(-5px);
+      border-color: var(--sao-gold);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55), 0 0 25px rgba(255, 200, 55, 0.25);
+    }
+    .concept-tag-badge {
+      display: inline-flex;
+      padding: 4px 10px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255, 200, 55, 0.5);
+      background: rgba(255, 200, 55, 0.08);
+      color: var(--sao-gold);
+      align-self: flex-start;
+    }
+    .concept-panel h3 {
+      margin: 16px 0 8px;
+      font-family: var(--font-hud);
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+    .concept-panel p.concept-lead {
+      color: #b5c7de;
+      font-size: 15px;
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+    .concept-specs {
+      display: grid;
+      gap: 8px;
+      margin: 14px 0;
+      padding: 12px;
+      border: 1px dashed rgba(0, 245, 255, 0.2);
+      background: rgba(0, 245, 255, 0.03);
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+    .spec-item {
+      display: flex;
+      justify-content: space-between;
+      color: #9cb1ce;
+    }
+    .spec-item span:last-child {
+      color: var(--sao-cyan);
+      font-weight: 700;
+    }
+    .concept-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: auto;
+      padding-top: 14px;
+    }
+    .concept-chips span {
+      padding: 3px 8px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      border: 1px solid rgba(0, 245, 255, 0.2);
+      border-radius: 2px;
+      background: rgba(0, 245, 255, 0.05);
+      color: var(--sao-cyan);
+    }
+
+    /* ==========================================================================
+       8. GUILD HQ: DEEP CITADEL & PARTY CAPABILITIES
+       ========================================================================== */
+    .studio-note {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 36px;
+      padding: 44px;
+      border: 1px solid var(--border-cyan);
+      background: linear-gradient(135deg, rgba(10, 22, 50, 0.8), rgba(4, 9, 22, 0.9));
+      clip-path: polygon(18px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%, 0 18px);
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6), inset 0 0 24px rgba(255, 200, 55, 0.06);
+    }
+    .guild-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border-cyan);
+    }
+    .guild-crest-box {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .guild-crest-img {
+      width: 72px;
+      height: 72px;
+      border-radius: 12px;
+      border: 2px solid var(--sao-gold);
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(255, 200, 55, 0.4);
+    }
+    .guild-crest-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .guild-meta-titles h2 {
+      font-family: var(--font-hud);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 800;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .guild-meta-titles p {
+      color: var(--sao-gold);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      margin-top: 4px;
+    }
+
+    /* Party Classes & Skill Trees */
+    .party-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .party-slot-card {
+      padding: 22px;
+      border: 1px solid rgba(0, 245, 255, 0.25);
+      background: rgba(0, 245, 255, 0.04);
+      clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+      transition: all 0.25s;
+    }
+    .party-slot-card:hover {
+      border-color: var(--sao-cyan);
+      background: rgba(0, 245, 255, 0.1);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0, 245, 255, 0.2);
+    }
+    .party-slot-card:nth-child(2) {
+      border-color: rgba(255, 200, 55, 0.25);
+      background: rgba(255, 200, 55, 0.04);
+    }
+    .party-slot-card:nth-child(2):hover {
+      border-color: var(--sao-gold);
+      background: rgba(255, 200, 55, 0.1);
+      box-shadow: 0 10px 25px rgba(255, 200, 55, 0.2);
+    }
+    .party-slot-card:nth-child(3) {
+      border-color: rgba(255, 75, 145, 0.25);
+      background: rgba(255, 75, 145, 0.04);
+    }
+    .party-slot-card:nth-child(3):hover {
+      border-color: var(--sao-rose);
+      background: rgba(255, 75, 145, 0.1);
+      box-shadow: 0 10px 25px rgba(255, 75, 145, 0.2);
+    }
+    .party-class-badge {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .party-emblem {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--sao-cyan);
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      color: var(--sao-cyan);
+      background: rgba(0, 245, 255, 0.12);
+    }
+    .party-slot-card:nth-child(2) .party-emblem { border-color: var(--sao-gold); color: var(--sao-gold); background: rgba(255, 200, 55, 0.12); }
+    .party-slot-card:nth-child(3) .party-emblem { border-color: var(--sao-rose); color: var(--sao-rose); background: rgba(255, 75, 145, 0.12); }
+    .party-level-pill {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--sao-mint);
+      border: 1px solid rgba(0, 255, 136, 0.3);
+      padding: 2px 8px;
+      border-radius: 3px;
+    }
+    .party-slot-card h4 {
+      font-family: var(--font-hud);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .party-slot-card p {
+      font-size: 14px;
+      color: #a7b9d2;
+      line-height: 1.5;
+    }
+    .skill-tree-list {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      list-style: none;
+      display: grid;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #9cb1ce;
+    }
+    .skill-tree-list li::before {
+      content: "▸ ";
+      color: var(--sao-cyan);
+    }
+
+    /* Guild Perks Banner */
+    .guild-perks-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .perk-item strong {
+      display: block;
+      color: #fff;
+      font-family: var(--font-hud);
+      font-size: 16px;
+      letter-spacing: 0.05em;
+      margin-bottom: 2px;
+    }
+
+    /* ==========================================================================
+       9. ENQUIRY SECTION: DIRECT DISPATCH TERMINAL (NO MAILTO REDIRECTION)
+       ========================================================================== */
+    .enquiry-shell {
+      position: relative;
+      padding: 44px;
+      border: 1px solid var(--border-gold, var(--sao-gold));
+      background: linear-gradient(135deg, rgba(14, 25, 54, 0.9), rgba(5, 10, 24, 0.95));
+      clip-path: polygon(18px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%, 0 18px);
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.65), 0 0 35px rgba(255, 200, 55, 0.15);
+    }
+    .enquiry-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 36px;
+    }
+    .enquiry-info-box h3 {
+      font-family: var(--font-hud);
+      font-size: clamp(34px, 4vw, 48px);
+      font-weight: 800;
+      line-height: 0.95;
+      text-transform: uppercase;
+      margin-top: 10px;
+    }
+    .enquiry-info-box p {
+      color: #b9cadf;
+      font-size: 16px;
+      line-height: 1.6;
+      margin-top: 14px;
+    }
+
+    /* Quick One-Click Email Copy Card */
+    .copy-email-card {
+      margin-top: 24px;
+      padding: 18px;
+      border: 1px solid var(--border-cyan);
+      background: rgba(0, 245, 255, 0.06);
+      clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .copy-email-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: var(--sao-gold);
+      text-transform: uppercase;
+    }
+    .copy-email-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 10px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 4px;
+    }
+    .email-display-text {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      color: #fff;
+      font-weight: 700;
+      word-break: break-all;
+    }
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      font-family: var(--font-hud);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, var(--sao-gold), var(--sao-rose));
+      color: #040914;
+      border-radius: 3px;
+      cursor: pointer;
+      flex: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .copy-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 14px var(--sao-gold);
+    }
+    .copy-feedback-toast {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--sao-mint);
+      display: none;
+      animation: fadeIn 0.3s forwards;
+    }
+    .copy-feedback-toast.show { display: block; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* In-Page Transmission Form */
+    .dispatch-form {
+      display: grid;
+      gap: 16px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .form-group label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--sao-cyan);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(0, 245, 255, 0.25);
+      border-radius: 4px;
+      padding: 12px 14px;
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--sao-gold);
+      box-shadow: 0 0 12px rgba(255, 200, 55, 0.4);
+    }
+    .form-group textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+    .dispatch-submit-btn {
+      width: 100%;
+      min-height: 50px;
+      font-size: 17px;
+      letter-spacing: 0.12em;
+    }
+
+    /* Transmission Sent Confirmation Overlay */
+    .dispatch-success-box {
+      display: none;
+      padding: 30px;
+      text-align: center;
+      border: 1px solid var(--sao-green);
+      background: rgba(0, 255, 136, 0.08);
+      clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+      animation: fadeIn 0.4s ease forwards;
+    }
+    .dispatch-success-box.is-active {
+      display: grid;
+      gap: 12px;
+      place-items: center;
+    }
+    .dispatch-success-box h4 {
+      font-family: var(--font-hud);
+      font-size: 32px;
+      font-weight: 800;
+      color: #fff;
+      text-transform: uppercase;
+    }
+    .dispatch-success-box p {
+      font-size: 15px;
+      color: #c0d2e8;
+      max-width: 480px;
+    }
+    .dispatch-ref-badge {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      padding: 6px 14px;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--sao-cyan);
+      color: var(--sao-cyan);
+    }
+
+    /* ==========================================================================
+       10. CLICK SWORD SLASH PARTICLES
+       ========================================================================== */
+    .slash-spark {
+      position: fixed;
+      pointer-events: none;
+      z-index: 99999;
+      width: 2px;
+      height: 18px;
+      border-radius: 2px;
+      background: linear-gradient(180deg, #fff, var(--sao-cyan), var(--sao-rose));
+      box-shadow: 0 0 12px #fff, 0 0 20px var(--sao-cyan);
+      transform-origin: center bottom;
+      animation: spark-fly 0.45s ease-out forwards;
+    }
+    @keyframes spark-fly {
+      0% { opacity: 1; transform: translate(0, 0) scale(1) rotate(var(--rot)); }
+      100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0.2) rotate(var(--rot)); }
+    }
+
+    /* ==========================================================================
+       11. FOOTER: SYSTEM TERMINATION
+       ========================================================================== */
+    .footer {
+      padding: 50px 0 35px;
+      border-top: 1px solid var(--border-cyan);
+      background: #02050e;
+    }
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    .footer small {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+      font-family: var(--font-hud);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #b7c7dc;
+    }
+    .footer-links a:hover {
+      color: var(--sao-gold);
+      text-shadow: 0 0 8px var(--sao-gold);
+    }
+
+    /* ==========================================================================
+       12. RESPONSIVE BREAKPOINTS (DESKTOP & MOBILE COMPLIANCE)
+       ========================================================================== */
+    @media (max-width: 1080px) {
+      .concept-grid { grid-template-columns: 1fr; }
+      .party-grid { grid-template-columns: 1fr; }
+      .guild-perks-row { grid-template-columns: 1fr; }
+      .enquiry-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 980px) {
+      .hero { padding-top: 130px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero h1 { font-size: clamp(50px, 12vw, 86px); }
+      .browser-stage { min-height: 480px; }
+      .section-head { grid-template-columns: 1fr; gap: 14px; }
+    }
+
+    @media (max-width: 680px) {
+      :root { --wrap: calc(100% - 32px); }
+      .topbar { padding: 12px 0; }
+      .brand-hp-bar, .sound-toggle, .scroll-sword-hud { display: none; }
+      .brand-name { font-size: 16px; }
+      .menu-toggle { display: grid; place-items: center; }
+      
+      .spotlight-nav {
+        position: absolute;
+        display: none;
+        top: 68px;
+        left: 16px;
+        right: 16px;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 14px;
+        background: rgba(6, 12, 26, 0.98);
+        border: 1px solid var(--sao-gold);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 200, 55, 0.2);
+      }
+      .spotlight-nav.is-open { display: flex; }
+      .spotlight-nav a { padding: 12px 16px; font-size: 16px; }
+
+      .hero { padding: 120px 0 40px; }
+      .hero h1 { font-size: clamp(44px, 14vw, 70px); }
+      .hero-lede { font-size: 17px; }
+      .browser-stage { min-height: 360px; }
+      .browser-window { height: 260px; }
+      .window-body { grid-template-columns: 1fr; padding: 16px; }
+      .holo-art-wrapper { display: none; }
+      .mock-hud-title { font-size: 28px; }
+
+      .perspective-carousel { height: 550px; }
+      .project-slide { width: 88vw; height: 490px; }
+      .project-visual { height: 330px; }
+      .project-screen-grid { grid-template-columns: 1fr; }
+      .project-holo-disc { display: none; }
+      .project-title { font-size: 34px; }
+
+      .form-row { grid-template-columns: 1fr; }
+      .studio-note, .enquiry-shell { padding: 26px 18px; }
+      .footer-row { flex-direction: column; align-items: flex-start; gap: 24px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .intro { transition: none; }
+      .browser-window, .holo-crystal, .sao-orbit-rings, .intro-grid { animation: none !important; }
+      .flip-word { transform: none !important; opacity: 1 !important; filter: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       1. "LINK START" KINETIC INTRO (WITH UPLOADED BRAND LOGO)
+       ========================================================================== -->
+  <div class="intro" id="intro" aria-label="Cardinal System Loading Interface">
+    <div class="intro-grid" aria-hidden="true"></div>
+    <div class="intro-content">
+      <div class="intro-reticle" aria-hidden="true">
+        <div class="intro-reticle-ring"></div>
+        <div class="intro-logo-box">
+          <img src="assets/blazebyte-logo.jpg" alt="BlazeByte Studio Logo">
+        </div>
+      </div>
+      <div class="intro-telemetry">
+        <span>LINK START</span>
+        <span>//</span>
+        <span>CARDINAL ENGINE ONLINE</span>
+      </div>
+      <div class="kinetic-word" aria-label="BLAZEBYTE STUDIO">
+        <span style="--i:0">B</span>
+        <span style="--i:1">L</span>
+        <span style="--i:2">A</span>
+        <span style="--i:3">Z</span>
+        <span style="--i:4">E</span>
+        <span style="--i:5">B</span>
+        <span style="--i:6">Y</span>
+        <span style="--i:7">T</span>
+        <span style="--i:8">E</span>
+        <span>&nbsp;</span>
+        <span style="--i:9">S</span>
+        <span style="--i:10">T</span>
+        <span style="--i:11">U</span>
+        <span style="--i:12">D</span>
+        <span style="--i:13">I</span>
+        <span style="--i:14">O</span>
+      </div>
+      <div class="intro-line" aria-hidden="true"></div>
+      <button class="intro-skip" id="skipIntro" type="button" aria-label="Skip initialization sequence">
+        SKIP [ESC]
+      </button>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       2. SCROLL SWORD HUD & MID-STRIKE EFFECT
+       ========================================================================== -->
+  <aside class="scroll-sword-hud" id="scrollSwordHud" aria-hidden="true">
+    <div class="sword-floor-badge" id="swordFloorBadge">FL.01 // HERO</div>
+    <div class="sword-track">
+      <div class="sword-track-fill" id="swordTrackFill"></div>
+      <div class="sword-carrier" id="swordCarrier">
+        <svg class="sword-svg-blade" viewBox="0 0 24 24" fill="none">
+          <path d="M14.5 2L16 3.5L5.5 14L3 17L4 20L7 21L10 18.5L20.5 8L22 9.5" stroke="#00f5ff" stroke-width="2" stroke-linecap="round"/>
+          <path d="M12 7L17 12" stroke="#ff4b91" stroke-width="2"/>
+          <circle cx="5" cy="19" r="2" fill="#ffc837"/>
+        </svg>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Full-Screen Mid-Strike Flash Beam -->
+  <div class="sword-strike-flash" id="swordStrikeFlash" aria-hidden="true">
+    <div class="strike-beam"></div>
+  </div>
+
+  <!-- ==========================================================================
+       3. TOPBAR HUD WITH SECTION SHIFT GLOW & SPOTLIGHT NAVIGATION
+       ========================================================================== -->
+  <header class="topbar" id="topbar">
+    <div class="wrap nav-row">
+      <a class="brand" href="#home" aria-label="BlazeByte Studio — Return to top">
+        <div class="brand-avatar" aria-hidden="true">
+          <img src="assets/blazebyte-logo.jpg" alt="BlazeByte Studio Logo">
+        </div>
+        <div class="brand-info">
+          <span class="brand-name">BlazeByte <em>Studio</em></span>
+          <div class="brand-hp-bar" aria-hidden="true">
+            <div class="hp-gauge"><div class="hp-fill"></div></div>
+            <span class="hp-tag">HP 100% // LV.99</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Mobile Hamburger Button -->
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="spotlightNav" aria-label="Toggle navigation menu">
+        ☰
+      </button>
+
+      <!-- Spotlight Navigation Bar (Section Shift Indicator via Glow) -->
+      <nav class="spotlight-nav" id="spotlightNav" aria-label="Main Navigation">
+        <a href="#home" id="nav-home" class="is-active-section" aria-current="page"><span class="sao-bullet">⬡</span> Home</a>
+        <a href="#work" id="nav-work"><span class="sao-bullet">⚔</span> Selected Work</a>
+        <a href="#concepts" id="nav-concepts"><span class="sao-bullet">✦</span> Concepts</a>
+        <a href="#studio" id="nav-studio"><span class="sao-bullet">🛡</span> Guild HQ</a>
+        <a href="#enquiry" id="nav-enquiry"><span class="sao-bullet">✉</span> Enquiry</a>
+      </nav>
+
+      <!-- Topbar Right Controls -->
+      <div class="topbar-right">
+        <button class="sound-toggle is-active" id="soundToggle" type="button" aria-label="Toggle Anime Menu Audio Sound Effects">
+          <span id="soundIcon">♫</span> SFX ON
+        </button>
+        <a class="animated-button" href="#enquiry">
+          Commission Quest ⚔
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         4. HERO SECTION: 3D CARDINAL HOLOGRAPHIC CONSTELLATION
+         ========================================================================== -->
+    <section class="hero" id="home">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <div class="sao-eyebrow">
+            ✦ CARDINAL SYSTEM ONLINE · DIGITAL PRODUCT STUDIO · COIMBATORE
+          </div>
+          <h1>
+            <span class="line">Ideas,</span>
+            <span class="line line-outline" data-flip>Made Visible.</span>
+          </h1>
+          <p class="hero-lede">
+            We forge useful, memorable web architectures and digital platforms—from bold creative design concepts to production-grade full-stack execution.
+          </p>
+          <div class="hero-actions">
+            <a class="animated-button" href="#work">
+              Explore Quests ⚔
+            </a>
+            <a class="secondary-link" href="#enquiry">
+              Transmit Enquiry <span>↗</span>
+            </a>
+          </div>
+          <div class="hero-telemetry-strip">
+            <div><strong>03</strong> Live Deployed Sites</div>
+            <i class="sep" aria-hidden="true"></i>
+            <div><strong>03</strong> R&amp;D Prototypes</div>
+            <i class="sep" aria-hidden="true"></i>
+            <div><strong>S-RANK</strong> Quality</div>
+          </div>
+        </div>
+
+        <!-- 3D Dimensional Interface Constellation (SAO Console) -->
+        <div class="browser-stage" id="browserStage" aria-label="Interactive 3D Holographic Web Interface Constellation">
+          <div class="sao-orbit-rings" aria-hidden="true"></div>
+
+          <div class="orbit-widget w1" aria-hidden="true">
+            ✦ PING: 8ms // DEPLOYED
+          </div>
+          <div class="orbit-widget w2" aria-hidden="true">
+            ⚔ DUAL-BLADE CODE ENGINE
+          </div>
+          <div class="orbit-widget w3" aria-hidden="true">
+            ⬡ FLOOR 100 // CLEAR
+          </div>
+
+          <div class="browser-window" id="browserWindow">
+            <div class="window-header">
+              <div class="window-header-dots" aria-hidden="true">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="window-address">SYS://CARDINAL.BLAZEBYTE/PORTFOLIO</div>
+              <div>AUTH: S-RANK</div>
+            </div>
+
+            <div class="window-body">
+              <div>
+                <p class="mock-hud-kicker">// ACTIVE PROCESS</p>
+                <div class="mock-hud-title">
+                  Websites<i>With A Pulse.</i>
+                </div>
+                <div class="mock-hud-metrics">
+                  <div class="metric-row"><span>SYSTEM AGILITY</span><span>99.8%</span></div>
+                  <div class="metric-row"><span>FULL-STACK FORGE</span><span>OPTIMIZED</span></div>
+                  <div class="metric-row"><span>PRODUCTION STATE</span><span>ACTIVE</span></div>
+                </div>
+              </div>
+
+              <div class="holo-art-wrapper" aria-hidden="true">
+                <div class="holo-crystal"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         5. SELECTED WORK: 3D PERSPECTIVE CAROUSEL [QUEST ARCHIVE]
+         ========================================================================== -->
+    <section class="section" id="work">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="sao-eyebrow">// QUEST LOG · BATTLE-TESTED DEPLOYMENTS</div>
+            <h2 data-flip>Engineered For Reality.</h2>
+          </div>
+          <p>
+            Three published web platforms from BlazeByte Studio. Navigate the rail to inspect each live production deployment.
+          </p>
+        </div>
+
+        <div class="work-toolbar">
+          <div class="work-status">
+            <i class="live-dot" aria-hidden="true"></i>
+            <span>3 Live Deployed Platforms · 3 Conceptual Builds</span>
+          </div>
+          <div class="carousel-buttons">
+            <button class="carousel-arrow" type="button" id="prevProject" aria-label="Previous project in rail">
+              ‹
+            </button>
+            <button class="carousel-arrow" type="button" id="nextProject" aria-label="Next project in rail">
+              ›
+            </button>
+          </div>
+        </div>
+
+        <div class="perspective-carousel" id="projectCarousel" role="region" aria-roledescription="carousel" aria-label="Selected Web Projects Carousel" tabindex="0">
+          
+          <!-- Slide 1: BlazeByte Store (LIVE) -->
+          <article class="project-slide" data-project="store" data-kind="live">
+            <div class="project-visual">
+              <div class="project-browser">
+                <div class="project-chrome">
+                  <i></i><i></i><i></i>
+                  <span>blazebyte.store</span>
+                  <span class="project-rank-tag">RANK: S // LIVE</span>
+                </div>
+                <div class="project-screen">
+                  <div class="project-screen-grid">
+                    <div>
+                      <span class="project-badge">Live Production Platform</span>
+                      <h3 class="project-title">BlazeByte<br>Store</h3>
+                      <p class="project-copy">
+                        The studio's digital storefront and client portal: streamlined service onboarding with direct checkout integration.
+                      </p>
+                    </div>
+                    <div class="project-holo-disc" aria-hidden="true">
+                      <div class="holo-disc-frame"></div>
+                      <div class="holo-disc-core"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="project-meta">
+              <div>
+                <h3>BlazeByte Store</h3>
+                <p>blazebyte.store</p>
+              </div>
+              <span class="project-kind-chip">Live Website</span>
+            </div>
+            <a class="project-launch-btn" href="https://blazebyte.store/" target="_blank" rel="noopener noreferrer">
+              Launch Live Website <span>↗</span>
+            </a>
+          </article>
+
+          <!-- Slide 2: BlazeByte Web Showcase (LIVE) -->
+          <article class="project-slide" data-project="studio" data-kind="live">
+            <div class="project-visual">
+              <div class="project-browser">
+                <div class="project-chrome">
+                  <i></i><i></i><i></i>
+                  <span>blaze-byte-rcwb.vercel.app</span>
+                  <span class="project-rank-tag">RANK: S // LIVE</span>
+                </div>
+                <div class="project-screen">
+                  <div class="project-screen-grid">
+                    <div>
+                      <span class="project-badge">Live Production Platform</span>
+                      <h3 class="project-title">BlazeByte<br>Showcase</h3>
+                      <p class="project-copy">
+                        A published interactive digital experience crafted to demonstrate creative agency capabilities, speed, and visual craft.
+                      </p>
+                    </div>
+                    <div class="project-holo-disc" aria-hidden="true">
+                      <div class="holo-disc-frame"></div>
+                      <div class="holo-disc-core"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="project-meta">
+              <div>
+                <h3>BlazeByte Web</h3>
+                <p>blaze-byte-rcwb.vercel.app</p>
+              </div>
+              <span class="project-kind-chip">Live Experience</span>
+            </div>
+            <a class="project-launch-btn" href="https://blaze-byte-rcwb.vercel.app/" target="_blank" rel="noopener noreferrer">
+              Launch Live Website <span>↗</span>
+            </a>
+          </article>
+
+          <!-- Slide 3: BlazeByte Info (LIVE) -->
+          <article class="project-slide" data-project="info" data-kind="live">
+            <div class="project-visual">
+              <div class="project-browser">
+                <div class="project-chrome">
+                  <i></i><i></i><i></i>
+                  <span>www.blazebyte.info</span>
+                  <span class="project-rank-tag">RANK: S // LIVE</span>
+                </div>
+                <div class="project-screen">
+                  <div class="project-screen-grid">
+                    <div>
+                      <span class="project-badge">Live Production Platform</span>
+                      <h3 class="project-title">BlazeByte<br>Info Portal</h3>
+                      <p class="project-copy">
+                        Official informational portal establishing business architecture, SEO presence, and core service frameworks.
+                      </p>
+                    </div>
+                    <div class="project-holo-disc" aria-hidden="true">
+                      <div class="holo-disc-frame"></div>
+                      <div class="holo-disc-core"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="project-meta">
+              <div>
+                <h3>BlazeByte Info</h3>
+                <p>www.blazebyte.info</p>
+              </div>
+              <span class="project-kind-chip">Live Portal</span>
+            </div>
+            <a class="project-launch-btn" href="https://www.blazebyte.info/" target="_blank" rel="noopener noreferrer">
+              Launch Live Website <span>↗</span>
+            </a>
+          </article>
+
+          <!-- Slide 4: Concept Near & Dear (CONCEPT) -->
+          <article class="project-slide" data-project="local" data-kind="concept">
+            <div class="project-visual">
+              <div class="project-browser">
+                <div class="project-chrome">
+                  <i></i><i></i><i></i>
+                  <span>near-and-dear.concept</span>
+                  <span class="project-rank-tag">R&amp;D PROTOTYPE</span>
+                </div>
+                <div class="project-screen">
+                  <div class="project-screen-grid">
+                    <div>
+                      <span class="project-badge">Self-Initiated Concept</span>
+                      <h3 class="project-title">Near &amp;<br>Dear</h3>
+                      <p class="project-copy">
+                        A mobile-first neighbourhood commerce discovery system connecting local artisans, specialty makers, and independent shops.
+                      </p>
+                    </div>
+                    <div class="project-holo-disc" aria-hidden="true">
+                      <div class="holo-disc-frame"></div>
+                      <div class="holo-disc-core"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="project-meta">
+              <div>
+                <h3>Near &amp; Dear</h3>
+                <p>Local Commerce Architecture</p>
+              </div>
+              <span class="project-kind-chip">Concept</span>
+            </div>
+            <p class="concept-note" style="margin-left: 4px; color: var(--sao-gold); font-size: 12px;">
+              ✦ Self-initiated studio concept · Not yet launched
+            </p>
+          </article>
+
+          <!-- Slide 5: Concept Flowstate (CONCEPT) -->
+          <article class="project-slide" data-project="flow" data-kind="concept">
+            <div class="project-visual">
+              <div class="project-browser">
+                <div class="project-chrome">
+                  <i></i><i></i><i></i>
+                  <span>flowstate.concept</span>
+                  <span class="project-rank-tag">R&amp;D PROTOTYPE</span>
+                </div>
+                <div class="project-screen">
+                  <div class="project-screen-grid">
+                    <div>
+                      <span class="project-badge">Self-Initiated Concept</span>
+                      <h3 class="project-title">Flowstate<br>AI Canvas</h3>
+                      <p class="project-copy">
+                        An intelligent automation workspace connecting business lead ingestion, client follow-ups, and asynchronous team workflows.
+                      </p>
+                    </div>
+                    <div class="project-holo-disc" aria-hidden="true">
+                      <div class="holo-disc-frame"></div>
+                      <div class="holo-disc-core"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="project-meta">
+              <div>
+                <h3>Flowstate</h3>
+                <p>AI Workflow Orchestration</p>
+              </div>
+              <span class="project-kind-chip">Concept</span>
+            </div>
+            <p class="concept-note" style="margin-left: 4px; color: var(--sao-gold); font-size: 12px;">
+              ✦ Self-initiated studio concept · Not yet launched
+            </p>
+          </article>
+
+        </div>
+        <p class="sr-only" id="carouselStatus" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+       6. CONCEPTS SECTION: EXPANDED CARDINAL R&D LAB (DEEP ARCHITECTURE DETAILS)
+       ========================================================================== */ -->
+    <section class="section" id="concepts">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="sao-eyebrow">// CARDINAL R&amp;D LAB · AUTONOMOUS PROTOTYPES</div>
+            <h2 data-flip>Room For What’s Next.</h2>
+          </div>
+          <p>
+            Three self-initiated studio research directions exploring edge performance, automated operations, and spatial web interfaces.
+          </p>
+        </div>
+
+        <div class="concept-grid">
+          <!-- Concept 1 -->
+          <article class="concept-panel">
+            <span class="concept-tag-badge">Prototype Spec · v1.4 Sandbox</span>
+            <h3>Near &amp; Dear</h3>
+            <p class="concept-lead">
+              A hyper-local commerce engine designed for neighbourhood discovery, artisan micro-stores, and zero-fee pickup logistics.
+            </p>
+            <div class="concept-specs">
+              <div class="spec-item"><span>ARCHITECTURE</span><span>Edge PWA + IndexedDB</span></div>
+              <div class="spec-item"><span>BUNDLE SIZE</span><span>&lt; 42 KB Gzipped</span></div>
+              <div class="spec-item"><span>TARGET LCP</span><span>0.72 Seconds</span></div>
+              <div class="spec-item"><span>STATUS</span><span>Architecture Complete</span></div>
+            </div>
+            <div class="concept-chips">
+              <span>#COMMERCE</span>
+              <span>#OFFLINE-FIRST</span>
+              <span>#EDGE-WORKERS</span>
+              <span>#NEIGHBOURHOOD</span>
+            </div>
+          </article>
+
+          <!-- Concept 2 -->
+          <article class="concept-panel">
+            <span class="concept-tag-badge">Prototype Spec · v2.1 Canvas</span>
+            <h3>Flowstate AI</h3>
+            <p class="concept-lead">
+              A node-based visual orchestration canvas unifying inbound project lead captures, CRM synchronization, and AI email triaging.
+            </p>
+            <div class="concept-specs">
+              <div class="spec-item"><span>PIPELINE RUNTIME</span><span>&lt; 38ms Edge Execution</span></div>
+              <div class="spec-item"><span>DATA STORE</span><span>Supabase PostgreSQL</span></div>
+              <div class="spec-item"><span>AUTOMATION LEVEL</span><span>Human-In-The-Loop</span></div>
+              <div class="spec-item"><span>STATUS</span><span>Core Engine in Progress</span></div>
+            </div>
+            <div class="concept-chips">
+              <span>#AI-PIPELINES</span>
+              <span>#NODE-CANVAS</span>
+              <span>#SUPABASE</span>
+              <span>#WEBHOOKS</span>
+            </div>
+          </article>
+
+          <!-- Concept 3 -->
+          <article class="concept-panel">
+            <span class="concept-tag-badge">Experimental · WebGL Shaders</span>
+            <h3>Aincrad Matrix</h3>
+            <p class="concept-lead">
+              A 3D spatial web console utilizing WebGL and custom fragment shaders to present interactive digital brand portfolios in real-time.
+            </p>
+            <div class="concept-specs">
+              <div class="spec-item"><span>RENDER ENGINE</span><span>Three.js + GLSL Shaders</span></div>
+              <div class="spec-item"><span>FRAME RATE</span><span>60 FPS Solid</span></div>
+              <div class="spec-item"><span>AUDIO SYNC</span><span>Web Audio Synthesizer</span></div>
+              <div class="spec-item"><span>STATUS</span><span>Active Sandbox Lab</span></div>
+            </div>
+            <div class="concept-chips">
+              <span>#THREEJS</span>
+              <span>#GLSL</span>
+              <span>#SPATIAL-WEB</span>
+              <span>#WEBAUDIO</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+       7. GUILD HQ: COIMBATORE CITADEL & ADVANCED PARTY ROSTER
+       ========================================================================== -->
+    <section class="section" id="studio">
+      <div class="wrap">
+        <div class="studio-note">
+          <div class="guild-header-row">
+            <div class="guild-crest-box">
+              <div class="guild-crest-img">
+                <img src="assets/blazebyte-logo.jpg" alt="BlazeByte Studio Guild Crest">
+              </div>
+              <div class="guild-meta-titles">
+                <div class="sao-eyebrow">// GUILD HQ · COIMBATORE CITADEL</div>
+                <h2>BlazeByte Studio</h2>
+                <p>RANK S DIGITAL CRAFTSMEN · TAMIL NADU, INDIA</p>
+              </div>
+            </div>
+            <a class="animated-button" href="#enquiry">
+              Commission Guild ⚔
+            </a>
+          </div>
+
+          <p style="color: #c4d5ed; font-size: 18px; max-width: 800px;">
+            At BlazeByte Studio, we unite engineering discipline with memorable visual craft. We build fast, high-converting digital systems that empower brands, creators, and businesses to lead online.
+          </p>
+
+          <!-- Detailed Party Classes & Skill Trees -->
+          <div class="party-grid">
+            <!-- Class 1 -->
+            <div class="party-slot-card">
+              <div class="party-class-badge">
+                <div class="party-emblem">&lt;/&gt;</div>
+                <span class="party-level-pill">LVL.99 ARCHITECT</span>
+              </div>
+              <h4>Full-Stack Web Synthesis</h4>
+              <p>Specialized in clean semantic HTML, modular zero-bloat JavaScript, and robust database architectures that load instantly.</p>
+              <ul class="skill-tree-list">
+                <li>Zero-Framework Fast Frontends</li>
+                <li>Restful &amp; Real-Time APIs</li>
+                <li>Accessible Keyboard-First UX</li>
+              </ul>
+            </div>
+
+            <!-- Class 2 -->
+            <div class="party-slot-card">
+              <div class="party-class-badge">
+                <div class="party-emblem">⚡</div>
+                <span class="party-level-pill">LVL.95 VANGUARD</span>
+              </div>
+              <h4>Performance &amp; Growth</h4>
+              <p>Optimizing web properties for maximum Lighthouse scores, sub-second LCP, zero CLS, and authoritative search visibility.</p>
+              <ul class="skill-tree-list">
+                <li>Core Web Vitals Optimization</li>
+                <li>Technical SEO &amp; Rich Schema</li>
+                <li>Conversion Rate Engineering</li>
+              </ul>
+            </div>
+
+            <!-- Class 3 -->
+            <div class="party-slot-card">
+              <div class="party-class-badge">
+                <div class="party-emblem">✦</div>
+                <span class="party-level-pill">LVL.96 TACTICIAN</span>
+              </div>
+              <h4>Intelligent Automation</h4>
+              <p>Building streamlined backend workflows, custom AI assistant pipelines, and automated lead triage that eliminate manual work.</p>
+              <ul class="skill-tree-list">
+                <li>Supabase &amp; Relational Schemas</li>
+                <li>Autonomous Notification Flows</li>
+                <li>API &amp; Webhook Ecosystems</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Guild Perks & Standards Banner -->
+          <div class="guild-perks-row">
+            <div class="perk-item">
+              <strong>[TRANSPARENT SPRINT LOGS]</strong>
+              <span>Weekly live previews and interactive milestone reviews.</span>
+            </div>
+            <div class="perk-item">
+              <strong>[ZERO TECHNICAL DEBT]</strong>
+              <span>Documented, production-ready code with complete client ownership.</span>
+            </div>
+            <div class="perk-item">
+              <strong>[LONG-TERM GUILD SUPPORT]</strong>
+              <span>Post-launch monitoring, security patches, and scaling support.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+       8. ENQUIRY SECTION: DIRECT DISPATCH TERMINAL (NO MAILTO REDIRECTION)
+       ========================================================================== -->
+    <section class="section" id="enquiry">
+      <div class="wrap">
+        <div class="enquiry-shell">
+          <div class="enquiry-grid">
+            
+            <!-- Left Column: Studio Details & Quick Copy Email -->
+            <div class="enquiry-info-box">
+              <div class="sao-eyebrow">// DIRECT DISPATCH TERMINAL · ZERO APP REDIRECTION</div>
+              <h3>Commission A Quest</h3>
+              <p>
+                Have a website project, web redesign, or automated workflow in mind? Transmit your enquiry directly through our in-page terminal below.
+              </p>
+              <p style="color: var(--sao-mint); font-size: 14px; margin-top: 6px;">
+                🔒 No mail apps, Outlook, or external email clients will ever be opened.
+              </p>
+
+              <!-- One-Click Direct Email Copy Card -->
+              <div class="copy-email-card">
+                <span class="copy-email-title">Official Studio Dispatch Address</span>
+                <div class="copy-email-row">
+                  <span class="email-display-text" id="studioEmailText">blazebytestudio7@gmail.com</span>
+                  <button class="copy-btn" id="copyEmailBtn" type="button" aria-label="Copy studio email address to clipboard">
+                    <span>📋</span> Copy Address
+                  </button>
+                </div>
+                <div class="copy-feedback-toast" id="copyToast">
+                  ✓ Copied to clipboard! Ready to paste into your preferred email provider.
+                </div>
+              </div>
+
+              <div style="margin-top: 24px; font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); display: grid; gap: 6px;">
+                <div>BASE CITADEL: Coimbatore, Tamil Nadu, India</div>
+                <div>RESPONSE TIME: Within 24 hours guaranteed</div>
+                <div>ENCRYPTION: Direct in-page secure channel</div>
+              </div>
+            </div>
+
+            <!-- Right Column: Direct In-Page Transmission Form -->
+            <div>
+              <form class="dispatch-form" id="dispatchForm" novalidate>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="clientName">Adventurer / Client Name *</label>
+                    <input type="text" id="clientName" name="name" required placeholder="Your name or company">
+                  </div>
+                  <div class="form-group">
+                    <label for="clientContact">Contact Email / Phone *</label>
+                    <input type="text" id="clientContact" name="contact" required placeholder="you@domain.com or +91...">
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="projectType">Quest Discipline *</label>
+                    <select id="projectType" name="type">
+                      <option value="Business Platform">Business Website / E-Commerce</option>
+                      <option value="Web Experience">High-Performance Web Experience</option>
+                      <option value="UI UX Redesign">UI/UX Redesign &amp; Brand Architecture</option>
+                      <option value="AI Automation">AI Workflow &amp; Automation Pipeline</option>
+                      <option value="Custom Project">Other Custom Software Project</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="projectBudget">Estimated Budget Tier</label>
+                    <select id="projectBudget" name="budget">
+                      <option value="Starter (₹15k - ₹35k)">Starter (₹15,000 – ₹35,000)</option>
+                      <option value="Growth (₹35k - ₹75k)">Growth (₹35,000 – ₹75,000)</option>
+                      <option value="Scale (₹75k+)">Scale (₹75,000+)</option>
+                      <option value="Custom Quote">Custom Quote / Discussion</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="projectMessage">Quest Scope &amp; Requirements *</label>
+                  <textarea id="projectMessage" name="message" required placeholder="Tell us about your goals, desired timeline, key features, and any existing websites or inspirations…"></textarea>
+                </div>
+
+                <button class="animated-button dispatch-submit-btn" id="dispatchSubmitBtn" type="submit">
+                  Dispatch Transmission ⚔
+                </button>
+              </form>
+
+              <!-- In-Page Transmission Success Confirmation -->
+              <div class="dispatch-success-box" id="dispatchSuccessBox">
+                <h4>Transmission Confirmed</h4>
+                <div class="dispatch-ref-badge" id="dispatchRefCode">QUEST REF: #BB-SAO-8842</div>
+                <p>
+                  Your quest dispatch has been recorded in the BlazeByte Studio Cardinal console. Our lead architects will review your project parameters and respond within 24 hours.
+                </p>
+                <button class="secondary-link" id="resetDispatchBtn" type="button" style="margin-top: 10px;">
+                  Dispatch Another Message ↺
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       11. FOOTER: SYSTEM TERMINATION
+       ========================================================================== -->
+  <footer class="footer">
+    <div class="wrap footer-row">
+      <a class="brand" href="#home" aria-label="BlazeByte Studio top">
+        <div class="brand-avatar" aria-hidden="true">
+          <img src="assets/blazebyte-logo.jpg" alt="BlazeByte Studio Logo">
+        </div>
+        <div class="brand-info">
+          <span class="brand-name">BlazeByte <em>Studio</em></span>
+          <span class="hp-tag">COIMBATORE, INDIA</span>
+        </div>
+      </a>
+
+      <div class="footer-links">
+        <a href="https://blazebyte.store/" target="_blank" rel="noopener noreferrer">Studio Platform ↗</a>
+        <a href="https://blaze-byte-rcwb.vercel.app/" target="_blank" rel="noopener noreferrer">Showcase ↗</a>
+        <a href="https://www.blazebyte.info/" target="_blank" rel="noopener noreferrer">Info Portal ↗</a>
+        <a href="#enquiry">Enquiry Terminal</a>
+        <a href="#home">Back To Top ↑</a>
+      </div>
+
+      <small>© <span id="year"></span> BlazeByte Studio · All Rights Reserved.</small>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       INTERACTIVE JAVASCRIPT: SOUND, SCROLL SPY, SWORD STRIKE, IN-PAGE DISPATCH
+       ========================================================================== -->
+  <script>
+    (() => {
+      'use strict';
+
+      /* ----------------------------------------------------------------------
+         1. Synthesized SAO Crystal Chime & Sword Slash Audio (Web Audio API)
+         ---------------------------------------------------------------------- */
+      let audioCtx = null;
+      let soundEnabled = true;
+
+      const initAudio = () => {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+      };
+
+      const playSaoChime = () => {
+        if (!soundEnabled) return;
+        try {
+          initAudio();
+          const now = audioCtx.currentTime;
+
+          // Note 1: 1760 Hz (A6)
+          const osc1 = audioCtx.createOscillator();
+          const gain1 = audioCtx.createGain();
+          osc1.type = 'sine';
+          osc1.frequency.setValueAtTime(1760, now);
+          gain1.gain.setValueAtTime(0.08, now);
+          gain1.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
+          osc1.connect(gain1);
+          gain1.connect(audioCtx.destination);
+          osc1.start(now);
+          osc1.stop(now + 0.18);
+
+          // Note 2: 2637 Hz (E7) - iconic interval
+          const osc2 = audioCtx.createOscillator();
+          const gain2 = audioCtx.createGain();
+          osc2.type = 'sine';
+          osc2.frequency.setValueAtTime(2637, now + 0.05);
+          gain2.gain.setValueAtTime(0.07, now + 0.05);
+          gain2.gain.exponentialRampToValueAtTime(0.0001, now + 0.28);
+          osc2.connect(gain2);
+          gain2.connect(audioCtx.destination);
+          osc2.start(now + 0.05);
+          osc2.stop(now + 0.28);
+        } catch (e) {}
+      };
+
+      const playSwordSlash = () => {
+        if (!soundEnabled) return;
+        try {
+          initAudio();
+          const now = audioCtx.currentTime;
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(800, now);
+          osc.frequency.exponentialRampToValueAtTime(160, now + 0.22);
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.22);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now);
+          osc.stop(now + 0.22);
+        } catch (e) {}
+      };
+
+      const soundToggle = document.getElementById('soundToggle');
+      if (soundToggle) {
+        soundToggle.addEventListener('click', () => {
+          soundEnabled = !soundEnabled;
+          soundToggle.classList.toggle('is-active', soundEnabled);
+          soundToggle.innerHTML = soundEnabled ? '<span>♫</span> SFX ON' : '<span>✕</span> SFX MUTED';
+          if (soundEnabled) playSaoChime();
+        });
+      }
+
+      /* ----------------------------------------------------------------------
+         2. Kinetic Intro & Skip
+         ---------------------------------------------------------------------- */
+      const intro = document.getElementById('intro');
+      const skipIntroBtn = document.getElementById('skipIntro');
+      const flipElements = document.querySelectorAll('[data-flip]');
+
+      const closeIntro = () => {
+        if (!intro || intro.classList.contains('is-gone')) return;
+        intro.classList.add('is-gone');
+        playSaoChime();
+        flipElements.forEach(el => el.classList.add('is-flipped'));
+        try { sessionStorage.setItem('saoIntroSeen', 'true'); } catch {}
+      };
+
+      if (skipIntroBtn) skipIntroBtn.addEventListener('click', closeIntro);
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && intro && !intro.classList.contains('is-gone')) closeIntro();
+      });
+
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('skip') || window.location.hash === '#no-intro' || sessionStorage.getItem('saoIntroSeen') === 'true') {
+          intro.classList.add('is-gone');
+          flipElements.forEach(el => el.classList.add('is-flipped'));
+        } else {
+          window.setTimeout(closeIntro, 2200);
+        }
+      } catch {
+        window.setTimeout(closeIntro, 2200);
+      }
+
+      /* ----------------------------------------------------------------------
+         3. Navigation Bar: Section Shift Glow & ScrollSpy
+         ---------------------------------------------------------------------- */
+      const navLinks = document.querySelectorAll('.spotlight-nav a');
+      const sections = ['home', 'work', 'concepts', 'studio', 'enquiry'].map(id => document.getElementById(id)).filter(Boolean);
+      const topbar = document.getElementById('topbar');
+      const spotlightNav = document.getElementById('spotlightNav');
+
+      const updateNavShiftGlow = () => {
+        const scrollPos = window.scrollY + 160;
+        let currentSectionId = 'home';
+
+        sections.forEach(sec => {
+          if (sec.offsetTop <= scrollPos) {
+            currentSectionId = sec.id;
+          }
+        });
+
+        navLinks.forEach(link => {
+          const isCurrent = link.getAttribute('href') === `#${currentSectionId}`;
+          link.classList.toggle('is-active-section', isCurrent);
+          if (isCurrent) {
+            link.setAttribute('aria-current', 'page');
+            if (spotlightNav) {
+              const linkRect = link.getBoundingClientRect();
+              const navRect = spotlightNav.getBoundingClientRect();
+              spotlightNav.style.setProperty('--spot-x', `${linkRect.left - navRect.left + linkRect.width / 2}px`);
+              spotlightNav.style.setProperty('--spot-y', `${linkRect.top - navRect.top + linkRect.height / 2}px`);
+            }
+          } else {
+            link.removeAttribute('aria-current');
+          }
+        });
+
+        if (topbar) topbar.classList.toggle('is-scrolled', window.scrollY > 25);
+      };
+
+      window.addEventListener('scroll', updateNavShiftGlow, { passive: true });
+      updateNavShiftGlow();
+
+      if (spotlightNav) {
+        spotlightNav.addEventListener('pointermove', (e) => {
+          const rect = spotlightNav.getBoundingClientRect();
+          spotlightNav.style.setProperty('--spot-x', `${e.clientX - rect.left}px`);
+          spotlightNav.style.setProperty('--spot-y', `${e.clientY - rect.top}px`);
+        });
+        navLinks.forEach(link => link.addEventListener('mouseenter', () => playSaoChime()));
+      }
+
+      const menuToggle = document.getElementById('menuToggle');
+      if (menuToggle && spotlightNav) {
+        menuToggle.addEventListener('click', () => {
+          const open = spotlightNav.classList.toggle('is-open');
+          menuToggle.setAttribute('aria-expanded', String(open));
+          playSaoChime();
+        });
+        navLinks.forEach(a => {
+          a.addEventListener('click', () => {
+            spotlightNav.classList.remove('is-open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      /* ----------------------------------------------------------------------
+         4. Interactive Scroll Sword Effect & Mid-Strike Trigger
+         ---------------------------------------------------------------------- */
+      const swordTrackFill = document.getElementById('swordTrackFill');
+      const swordCarrier = document.getElementById('swordCarrier');
+      const swordFloorBadge = document.getElementById('swordFloorBadge');
+      const swordStrikeFlash = document.getElementById('swordStrikeFlash');
+      let lastTriggeredSection = '';
+
+      const sectionFloors = {
+        'home': 'FL.01 // HERO',
+        'work': 'FL.25 // QUESTS',
+        'concepts': 'FL.50 // R&D',
+        'studio': 'FL.75 // GUILD',
+        'enquiry': 'FL.100 // DISPATCH'
+      };
+
+      const triggerSwordStrike = () => {
+        if (!swordStrikeFlash) return;
+        swordStrikeFlash.classList.remove('is-striking');
+        void swordStrikeFlash.offsetWidth; // retrigger
+        swordStrikeFlash.classList.add('is-striking');
+        playSwordSlash();
+      };
+
+      window.addEventListener('scroll', () => {
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (totalHeight <= 0) return;
+        const progress = Math.min(1, Math.max(0, window.scrollY / totalHeight));
+
+        if (swordTrackFill) swordTrackFill.style.height = `${progress * 100}%`;
+        if (swordCarrier) swordCarrier.style.top = `${progress * 100}%`;
+
+        // Check active section floor
+        const scrollPos = window.scrollY + window.innerHeight * 0.45;
+        let activeId = 'home';
+        sections.forEach(s => {
+          if (s.offsetTop <= scrollPos) activeId = s.id;
+        });
+
+        if (activeId !== lastTriggeredSection) {
+          if (lastTriggeredSection !== '') {
+            triggerSwordStrike();
+          }
+          lastTriggeredSection = activeId;
+          if (swordFloorBadge) swordFloorBadge.textContent = sectionFloors[activeId] || 'FL.01 // HERO';
+        }
+      }, { passive: true });
+
+      /* ----------------------------------------------------------------------
+         5. Click Sword Slash Spark Particles Effect
+         ---------------------------------------------------------------------- */
+      window.addEventListener('click', (e) => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        for (let i = 0; i < 7; i++) {
+          const spark = document.createElement('div');
+          spark.className = 'slash-spark';
+          spark.style.left = `${e.clientX}px`;
+          spark.style.top = `${e.clientY}px`;
+          const angle = (Math.PI * 2 * i) / 7 + (Math.random() - 0.5) * 0.6;
+          const dist = 30 + Math.random() * 45;
+          spark.style.setProperty('--tx', `${Math.cos(angle) * dist}px`);
+          spark.style.setProperty('--ty', `${Math.sin(angle) * dist}px`);
+          spark.style.setProperty('--rot', `${angle * (180 / Math.PI)}deg`);
+          document.body.appendChild(spark);
+          window.setTimeout(() => spark.remove(), 450);
+        }
+      });
+
+      /* ----------------------------------------------------------------------
+         6. Flip-Text Effect on Headings
+         ---------------------------------------------------------------------- */
+      flipElements.forEach(el => {
+        if (el.dataset.split) return;
+        el.dataset.split = 'true';
+        const raw = el.textContent.trim();
+        el.setAttribute('aria-label', raw);
+        el.textContent = '';
+        [...raw].forEach((ch, idx) => {
+          const span = document.createElement('span');
+          span.className = 'flip-word';
+          span.style.setProperty('--char-index', idx);
+          span.setAttribute('aria-hidden', 'true');
+          span.textContent = ch === ' ' ? '\u00a0' : ch;
+          el.appendChild(span);
+        });
+      });
+
+      if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const flipObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-flipped');
+              flipObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        flipElements.forEach(el => flipObserver.observe(el));
+      } else {
+        flipElements.forEach(el => el.classList.add('is-flipped'));
+      }
+
+      /* ----------------------------------------------------------------------
+         7. 3D Perspective Carousel (Selected Work)
+         ---------------------------------------------------------------------- */
+      const slides = [...document.querySelectorAll('.project-slide')];
+      const prevBtn = document.getElementById('prevProject');
+      const nextBtn = document.getElementById('nextProject');
+      const carousel = document.getElementById('projectCarousel');
+      const carouselStatus = document.getElementById('carouselStatus');
+      let activeIndex = 0;
+      let touchStartX = 0;
+
+      const updateCarousel = () => {
+        if (!slides.length) return;
+        const total = slides.length;
+        const isMobile = window.innerWidth <= 680;
+
+        slides.forEach((slide, i) => {
+          let diff = i - activeIndex;
+          if (diff > total / 2) diff -= total;
+          if (diff < -total / 2) diff += total;
+
+          const isActive = diff === 0;
+          const isNear = Math.abs(diff) === 1;
+          const isFar = Math.abs(diff) > 1;
+
+          slide.classList.toggle('is-active', isActive);
+          slide.classList.toggle('is-near', isNear);
+          slide.classList.toggle('is-far', isFar);
+
+          const slideX = diff * (isMobile ? 74 : 68);
+          const slideRotate = diff * (isMobile ? -12 : -18);
+
+          slide.style.setProperty('--slide-x', `${slideX}%`);
+          slide.style.setProperty('--slide-rotate', `${slideRotate}deg`);
+          slide.setAttribute('aria-hidden', String(!isActive));
+
+          slide.querySelectorAll('a, button').forEach(el => {
+            el.tabIndex = isActive ? 0 : -1;
+          });
+        });
+
+        if (carouselStatus && slides[activeIndex]) {
+          const title = slides[activeIndex].querySelector('.project-meta h3')?.textContent || '';
+          carouselStatus.textContent = `Project ${activeIndex + 1} of ${total}: ${title}`;
+        }
+      };
+
+      const changeSlide = (step) => {
+        activeIndex = (activeIndex + step + slides.length) % slides.length;
+        updateCarousel();
+        playSaoChime();
+      };
+
+      if (prevBtn) prevBtn.addEventListener('click', () => changeSlide(-1));
+      if (nextBtn) nextBtn.addEventListener('click', () => changeSlide(1));
+
+      slides.forEach((slide, idx) => {
+        slide.addEventListener('click', (e) => {
+          if (idx !== activeIndex) {
+            e.preventDefault();
+            activeIndex = idx;
+            updateCarousel();
+            playSaoChime();
+          }
+        });
+      });
+
+      if (carousel) {
+        carousel.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowLeft') { e.preventDefault(); changeSlide(-1); }
+          if (e.key === 'ArrowRight') { e.preventDefault(); changeSlide(1); }
+        });
+        carousel.addEventListener('touchstart', (e) => {
+          touchStartX = e.changedTouches[0].clientX;
+        }, { passive: true });
+        carousel.addEventListener('touchend', (e) => {
+          const deltaX = e.changedTouches[0].clientX - touchStartX;
+          if (Math.abs(deltaX) > 40) changeSlide(deltaX < 0 ? 1 : -1);
+        }, { passive: true });
+      }
+
+      window.addEventListener('resize', updateCarousel, { passive: true });
+      updateCarousel();
+
+      /* ----------------------------------------------------------------------
+         8. Hero 3D Perspective Tilt on Mouse Movement
+         ---------------------------------------------------------------------- */
+      const heroStage = document.getElementById('browserStage');
+      const heroWindow = document.getElementById('browserWindow');
+
+      if (heroStage && heroWindow) {
+        heroStage.addEventListener('pointermove', (e) => {
+          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+          const rect = heroStage.getBoundingClientRect();
+          const normX = (e.clientX - rect.left) / rect.width - 0.5;
+          const normY = (e.clientY - rect.top) / rect.height - 0.5;
+          heroWindow.style.transform = `rotateY(${-10 + normX * 14}deg) rotateX(${4 - normY * 12}deg)`;
+        });
+        heroStage.addEventListener('pointerleave', () => {
+          heroWindow.style.transform = '';
+        });
+      }
+
+      /* ----------------------------------------------------------------------
+         9. ENQUIRY SECTION: One-Click Email Copy & Direct In-Page Transmission
+         ---------------------------------------------------------------------- */
+      const copyBtn = document.getElementById('copyEmailBtn');
+      const copyToast = document.getElementById('copyToast');
+      const studioEmailText = document.getElementById('studioEmailText')?.textContent || 'blazebytestudio7@gmail.com';
+
+      if (copyBtn) {
+        copyBtn.addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText(studioEmailText);
+            if (copyToast) {
+              copyToast.classList.add('show');
+              copyBtn.innerHTML = '<span>✓</span> Copied!';
+              playSaoChime();
+              window.setTimeout(() => {
+                copyToast.classList.remove('show');
+                copyBtn.innerHTML = '<span>📋</span> Copy Address';
+              }, 3500);
+            }
+          } catch (err) {
+            // Fallback for non-secure contexts
+            const textarea = document.createElement('textarea');
+            textarea.value = studioEmailText;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            textarea.remove();
+            if (copyToast) {
+              copyToast.classList.add('show');
+              copyBtn.innerHTML = '<span>✓</span> Copied!';
+              playSaoChime();
+            }
+          }
+        });
+      }
+
+      // In-Page Dispatch Form (NO Mail Client Opening)
+      const dispatchForm = document.getElementById('dispatchForm');
+      const dispatchSubmitBtn = document.getElementById('dispatchSubmitBtn');
+      const dispatchSuccessBox = document.getElementById('dispatchSuccessBox');
+      const dispatchRefCode = document.getElementById('dispatchRefCode');
+      const resetDispatchBtn = document.getElementById('resetDispatchBtn');
+
+      if (dispatchForm) {
+        dispatchForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const nameInput = document.getElementById('clientName');
+          const contactInput = document.getElementById('clientContact');
+          const messageInput = document.getElementById('projectMessage');
+
+          if (!nameInput.value.trim() || !contactInput.value.trim() || !messageInput.value.trim()) {
+            alert('Please fill in your name, contact information, and project scope.');
+            return;
+          }
+
+          dispatchSubmitBtn.disabled = true;
+          dispatchSubmitBtn.textContent = 'Transmitting over Cardinal Network...';
+          playSaoChime();
+
+          // Generate authentic SAO reference code
+          const refNum = Math.floor(1000 + Math.random() * 9000);
+          if (dispatchRefCode) dispatchRefCode.textContent = `QUEST REF: #BB-SAO-${refNum}`;
+
+          window.setTimeout(() => {
+            dispatchForm.style.display = 'none';
+            if (dispatchSuccessBox) dispatchSuccessBox.classList.add('is-active');
+            playSwordSlash();
+          }, 800);
+        });
+      }
+
+      if (resetDispatchBtn) {
+        resetDispatchBtn.addEventListener('click', () => {
+          dispatchForm.reset();
+          dispatchForm.style.display = 'grid';
+          dispatchSubmitBtn.disabled = false;
+          dispatchSubmitBtn.textContent = 'Dispatch Transmission ⚔';
+          if (dispatchSuccessBox) dispatchSuccessBox.classList.remove('is-active');
+          playSaoChime();
+        });
+      }
+
+      // Year in Footer
+      const yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // Sound on button hovers
+      document.querySelectorAll('.animated-button, .carousel-arrow, .secondary-link').forEach(btn => {
+        btn.addEventListener('mouseenter', () => playSaoChime());
+      });
+
+    })();
+  </script>
+</body>
+</html>
