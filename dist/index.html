@@ -431,36 +431,39 @@
     <!-- ========================================================================
          INTERACTIVE AI CHATBOT DEMO SECTION
          ======================================================================== -->
-    <section class="section" style="background:rgba(7,12,30,0.85);border-top:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle);">
+    <section class="section chatbot-showcase-section" id="chatbot-showcase">
       <div class="wrap">
-        <div style="display:grid;grid-template-columns:1fr 1.15fr;gap:48px;align-items:center;">
-          <div>
+        <div class="chatbot-showcase-grid">
+          <div class="chatbot-showcase-content">
             <div class="eyebrow">LIVE INTERACTIVE SHOWCASE</div>
-            <h2 class="title" style="font-size:clamp(32px,3.8vw,52px);margin-bottom:20px;">Experience an Intelligent Studio Assistant in Action</h2>
-            <p style="font-size:17px;color:var(--text-muted);line-height:1.6;margin-bottom:24px;">
+            <h2 class="title">Experience an Intelligent Studio Assistant in Action</h2>
+            <p class="subtitle" style="text-align:left;margin:0 0 24px 0;">
               Test our client-side conversational AI demo. Ask about our 4 core divisions, query transparent USD packages, or request an instant project scope breakdown.
             </p>
             
-            <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:32px;">
-              <div style="display:flex;align-items:center;gap:10px;font-size:15px;color:#cbd5e1;">
-                <span style="color:var(--cyan);font-weight:700;">✓</span> Trained on real studio capabilities &amp; pricing
+            <div class="chatbot-feature-list">
+              <div class="chatbot-feature-item">
+                <span class="feature-check">✓</span>
+                <span>Trained on real studio capabilities &amp; pricing</span>
               </div>
-              <div style="display:flex;align-items:center;gap:10px;font-size:15px;color:#cbd5e1;">
-                <span style="color:var(--cyan);font-weight:700;">✓</span> Proactive lead qualification &amp; calendar routing
+              <div class="chatbot-feature-item">
+                <span class="feature-check">✓</span>
+                <span>Proactive lead qualification &amp; calendar routing</span>
               </div>
-              <div style="display:flex;align-items:center;gap:10px;font-size:15px;color:#cbd5e1;">
-                <span style="color:var(--cyan);font-weight:700;">✓</span> Enterprise guardrails to eliminate hallucination
+              <div class="chatbot-feature-item">
+                <span class="feature-check">✓</span>
+                <span>Enterprise guardrails to eliminate hallucination</span>
               </div>
             </div>
 
-            <div style="display:flex;gap:14px;flex-wrap:wrap;">
+            <div class="chatbot-action-buttons">
               <a class="btn btn-secondary" href="ai-chatbots.html">View Chatbot Solutions</a>
               <a class="btn btn-outline" href="contact.html">Request Custom Bot</a>
             </div>
           </div>
 
           <!-- Embedded Chatbot Widget Container -->
-          <div>
+          <div class="chatbot-widget-column">
             <div id="embeddedChatbotContainer"></div>
           </div>
         </div>

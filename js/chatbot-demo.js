@@ -269,10 +269,40 @@
       `;
       document.body.appendChild(launcher);
 
-      launcher.addEventListener('click', () => {
-        const win = floatContainer.querySelector('.chatbot-floating-window');
+      const win = floatContainer.querySelector('.chatbot-floating-window');
+
+      launcher.addEventListener('click', (e) => {
+        e.stopPropagation();
         win.classList.toggle('active');
       });
+
+      // Close floating window when clicking outside
+      document.addEventListener('click', (e) => {
+        if (win.classList.contains('active') && !win.contains(e.target) && !launcher.contains(e.target)) {
+          win.classList.remove('active');
+        }
+      });
+
+      // Close on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && win.classList.contains('active')) {
+          win.classList.remove('active');
+        }
+      });
+
+      // Auto-hide launcher when user is looking at embedded chatbot
+      if (embeddedEl && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              launcher.classList.add('launcher-hidden-embedded');
+            } else {
+              launcher.classList.remove('launcher-hidden-embedded');
+            }
+          });
+        }, { threshold: 0.15 });
+        observer.observe(embeddedEl);
+      }
     }
   });
 })();
