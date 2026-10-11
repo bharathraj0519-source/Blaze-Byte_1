@@ -18,7 +18,9 @@ const HTML_FILES = [
   'contact.html',
   'security.html',
   'privacy-policy.html',
-  'terms-of-service.html'
+  'terms-of-service.html',
+  'refund-policy.html',
+  'cookie-policy.html'
 ];
 
 function ensureDir(dir) {
@@ -70,14 +72,14 @@ copyDir(path.join(ROOT_DIR, 'assets'), path.join(DIST_DIR, 'assets'));
 if (fs.existsSync(path.join(ROOT_DIR, '.well-known'))) {
   copyDir(path.join(ROOT_DIR, '.well-known'), path.join(DIST_DIR, '.well-known'));
 }
-['.htaccess', 'security.txt', 'supabase-schema.sql'].forEach(f => {
+['.htaccess', 'security.txt', 'supabase-schema.sql', 'LEGAL_LICENSES.md'].forEach(f => {
   const p = path.join(ROOT_DIR, f);
   if (fs.existsSync(p)) fs.copyFileSync(p, path.join(DIST_DIR, f));
 });
 console.log('  + css/ (global.css, chatbot.css)');
-console.log('  + js/ (main.js, pricing-data.js, chatbot-demo.js, enquiry.js)');
+console.log('  + js/ (main.js, pricing-data.js, chatbot-demo.js, enquiry.js, cookie-consent.js, custom-select.js)');
 console.log('  + assets/ (all imagery, logos, icons, vector graphics)');
-console.log('  + security files (.htaccess, security.txt, .well-known)');
+console.log('  + security & legal files (.htaccess, security.txt, .well-known, LEGAL_LICENSES.md)');
 
 // 4. Generate robots.txt
 const robotsTxt = `# https://www.robotstxt.org/robotstxt.html
@@ -160,6 +162,36 @@ const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>${BASE_DOMAIN}/security.html</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>${BASE_DOMAIN}/privacy-policy.html</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>${BASE_DOMAIN}/terms-of-service.html</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>${BASE_DOMAIN}/refund-policy.html</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>${BASE_DOMAIN}/cookie-policy.html</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>`;
 fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), sitemapXml, 'utf8');

@@ -13,7 +13,12 @@ const PAGES = [
   'our-work.html',
   'solutions.html',
   'about.html',
-  'contact.html'
+  'contact.html',
+  'security.html',
+  'privacy-policy.html',
+  'terms-of-service.html',
+  'refund-policy.html',
+  'cookie-policy.html'
 ];
 
 console.log('--- Verifying Dist Deployment Package ---');

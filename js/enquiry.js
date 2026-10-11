@@ -1,11 +1,8 @@
 /**
  * BLAZEBYTE STUDIO — INTERNATIONAL LEAD GENERATION SYSTEM
- * Multi-Channel Submission Pipeline (Supabase REST + Local Backup + Silent Email Dispatch)
- * Project: https://ssbxolloyyvlbuefyhda.supabase.co
+ * High-Security Sanitized Lead Pipeline (Zero Client-Side Credentials)
+ * All sensitive database credentials proxied strictly through server-side environment
  */
-
-const SUPABASE_URL = 'https://ssbxolloyyvlbuefyhda.supabase.co';
-const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_hutGjIj8D5_sqewq7eGhcw_tuTkSX5G';
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('internationalEnquiryForm');
@@ -17,6 +14,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const refCodeEl = document.getElementById('enquiryRefCode');
   const budgetSelect = form.querySelector('#estimatedBudget');
   const milestoneBreakdownEl = document.getElementById('milestoneDepositBreakdown');
+
+  // Input Sanitizer Helper
+  function sanitizeInput(str, maxLen = 255) {
+    if (typeof str !== 'string') return '';
+    return str
+      .replace(/<[^>]*>/g, '') // Strip HTML tags
+      .replace(/[<>'"&]/g, c => ({
+        '<': '&lt;',
+        '>': '&gt;',
+        "'": '&#39;',
+        '"': '&quot;',
+        '&': '&amp;'
+      }[c] || c))
+      .trim()
+      .slice(0, maxLen);
+  }
+
+  function validateEmail(email) {
+    const re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+    return re.test(email) && email.length <= 120;
+  }
 
   // Milestone deposit estimation helper
   function updateMilestoneEstimate() {
@@ -46,10 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
     updateMilestoneEstimate();
   }
 
-  // Check URL query parameters to prefill service or package if passed
+  // Check URL query parameters to prefill service or package
   const params = new URLSearchParams(window.location.search);
   const prefillService = params.get('service');
-  const prefillPlan = params.get('plan');
   const prefillBudget = params.get('budget');
 
   if (prefillService) {
@@ -79,30 +96,38 @@ document.addEventListener('DOMContentLoaded', () => {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Honeypot anti-spam check
+    // Anti-Spam Honeypot Verification
     const honey = form.querySelector('input[name="_honey"]')?.value;
     if (honey) {
-      console.warn("Spam submission suppressed.");
+      console.warn("Automated bot submission suppressed.");
       return;
     }
 
     if (!form.reportValidity()) return;
 
     const formData = new FormData(form);
-    const fullName = formData.get('fullName')?.trim() || '';
-    const email = formData.get('businessEmail')?.trim() || '';
-    const company = formData.get('companyName')?.trim() || 'Independent';
-    const country = formData.get('country')?.trim() || 'International';
-    const service = formData.get('serviceInterested') || 'Multiple Services';
-    const budget = formData.get('estimatedBudget') || 'Not Sure';
-    const timeline = formData.get('expectedTimeline') || 'Standard';
-    const description = formData.get('projectDescription')?.trim() || '';
-    const contactMethod = formData.get('preferredContact') || 'Email';
+    const fullName = sanitizeInput(formData.get('fullName'), 100);
+    const email = (formData.get('businessEmail') || '').trim().toLowerCase();
+    const company = sanitizeInput(formData.get('companyName') || 'Independent', 100);
+    const country = sanitizeInput(formData.get('country') || 'International', 80);
+    const service = sanitizeInput(formData.get('serviceInterested') || 'Web Development', 80);
+    const budget = sanitizeInput(formData.get('estimatedBudget') || 'Not Sure', 60);
+    const timeline = sanitizeInput(formData.get('expectedTimeline') || 'Standard', 60);
+    const contactMethod = sanitizeInput(formData.get('preferredContact') || 'Email', 40);
+    const phone = sanitizeInput(formData.get('phoneNumber') || 'Not Provided', 30);
+    const description = sanitizeInput(formData.get('projectDescription'), 3000);
     const milestoneConsent = formData.get('milestonePaymentConsent') === 'Accepted';
     const privacyConsent = formData.get('privacyConsent') === 'Accepted';
 
+    // Front-End Field Validation
     if (!fullName || !email || !description) {
       statusEl.textContent = 'Please complete all required fields.';
+      statusEl.className = 'enquiry-status error';
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      statusEl.textContent = 'Please enter a valid business email address.';
       statusEl.className = 'enquiry-status error';
       return;
     }
@@ -126,124 +151,35 @@ document.addEventListener('DOMContentLoaded', () => {
     submitBtn.innerHTML = `<span>Transmitting to Global Desk…</span>`;
     statusEl.textContent = '';
 
-    // Split name for Supabase customer_requests table compatibility
-    const nameParts = fullName.split(' ');
-    const firstName = nameParts[0] || 'Client';
-    const lastName = nameParts.slice(1).join(' ') || 'Global';
-
-    const milestoneEstimateText = milestoneBreakdownEl ? milestoneBreakdownEl.innerText.replace('⚡ ', '') : '50% Upfront Milestone Deposit';
-
-    // Primary Database Payload (matches check constraint: request_type IN ('contact', 'enquiry', 'plan'))
-    const dbRecord = {
+    const payload = {
       reference_number: refNumber,
-      request_type: 'enquiry',
-      selected_service: `${service} (${budget})`,
-      quoted_price: budget,
-      first_name: firstName,
-      last_name: lastName,
-      phone: formData.get('phoneNumber')?.trim() || 'Not Provided',
-      email: email,
-      company: `${company} [${country}]`,
-      project_type: service,
-      project_details: `TIMELINE: ${timeline} | PREF CONTACT: ${contactMethod}\n50% MILESTONE TERMS: Accepted (${milestoneEstimateText})\n\nPROJECT SCOPE & TARGET GOALS:\n${description}`,
-      payment_preference: `50% Upfront Milestone Escrow (${milestoneEstimateText})`,
-      privacy_consent: true
+      fullName: fullName,
+      businessEmail: email,
+      companyName: company,
+      country: country,
+      serviceInterested: service,
+      estimatedBudget: budget,
+      expectedTimeline: timeline,
+      preferredContact: contactMethod,
+      phoneNumber: phone,
+      projectDescription: description,
+      milestonePaymentConsent: true,
+      privacyConsent: true
     };
 
-    let transmissionSuccess = false;
-
     try {
-      // 1. Primary Supabase REST transmission to ssbxolloyyvlbuefyhda.supabase.co
-      const supabasePromise = fetch(`${SUPABASE_URL}/rest/v1/customer_requests`, {
+      // Secure Backend Transmission (Zero Credentials Exposed)
+      const response = await fetch('/api/enquire', {
         method: 'POST',
         headers: {
-          apikey: SUPABASE_PUBLISHABLE_KEY,
-          Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
-          'Content-Type': 'application/json',
-          Prefer: 'return=minimal'
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(dbRecord)
+        body: JSON.stringify(payload)
       });
 
-      // 2. Separate Supabase table insert attempt (if project_enquiries table exists)
-      const separateSupabasePromise = fetch(`${SUPABASE_URL}/rest/v1/project_enquiries`, {
-        method: 'POST',
-        headers: {
-          apikey: SUPABASE_PUBLISHABLE_KEY,
-          Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
-          'Content-Type': 'application/json',
-          Prefer: 'return=minimal'
-        },
-        body: JSON.stringify({
-          reference_number: refNumber,
-          full_name: fullName,
-          business_email: email,
-          company_name: company,
-          country: country,
-          service_interested: service,
-          estimated_budget: budget,
-          expected_timeline: timeline,
-          preferred_contact: contactMethod,
-          phone_number: formData.get('phoneNumber')?.trim() || 'Not Provided',
-          project_description: description,
-          milestone_deposit_acknowledged: true,
-          deposit_amount_estimate: milestoneEstimateText
-        })
-      }).catch(() => null);
+      const result = await response.json().catch(() => ({}));
 
-      // 3. Local Server API endpoint backup
-      const localApiPromise = fetch('/api/enquire', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...dbRecord,
-          full_name: fullName,
-          milestone_deposit_acknowledged: true,
-          milestone_estimate: milestoneEstimateText,
-          description: description
-        })
-      }).catch(() => null);
-
-      // 4. Silent Background Email Dispatch to blazebytestudio7@gmail.com
-      // Transmits via HTTP AJAX without opening any external apps (no mailto / no email clients)
-      const emailPayload = {
-        referenceNumber: refNumber,
-        clientName: fullName,
-        businessEmail: email,
-        company: company,
-        country: country,
-        service: service,
-        estimatedBudget: budget,
-        milestonePaymentTerms: '50% Upfront Milestone Deposit Accepted',
-        estimatedDeposit: milestoneEstimateText,
-        timeline: timeline,
-        preferredContact: contactMethod,
-        phoneNumber: formData.get('phoneNumber')?.trim() || 'Not Provided',
-        projectScope: description,
-        _subject: `🌍 [BlazeByte International] New Project Enquiry — ${refNumber} (${service})`,
-        _template: 'table'
-      };
-
-      fetch('https://formsubmit.co/ajax/blazebytestudio7@gmail.com', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(emailPayload)
-      }).catch(err => console.warn('Background mail dispatch notice:', err));
-
-      // Wait for primary Supabase transmission
-      const supabaseRes = await supabasePromise;
-      if (supabaseRes && (supabaseRes.status === 201 || supabaseRes.ok)) {
-        transmissionSuccess = true;
-      } else {
-        console.warn('Supabase status:', supabaseRes ? supabaseRes.status : 'error');
-        // Check if local API succeeded
-        const localRes = await localApiPromise;
-        if (localRes && localRes.ok) {
-          transmissionSuccess = true;
-        }
-      }
-
-      if (transmissionSuccess) {
+      if (response.ok && result.success) {
         // Display Success State
         form.style.display = 'none';
         if (successBox) {
@@ -252,29 +188,11 @@ document.addEventListener('DOMContentLoaded', () => {
           successBox.scrollIntoView({ behavior: 'smooth' });
         }
       } else {
-        throw new Error('Pipeline unavailable.');
+        throw new Error(result.error || 'Server rejected transmission.');
       }
 
     } catch (err) {
-      console.error('Enquiry transmission error:', err);
-      // Even if network drops, check if local server received it
-      try {
-        const localRes = await fetch('/api/enquire', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(dbRecord)
-        });
-        if (localRes.ok) {
-          form.style.display = 'none';
-          if (successBox) {
-            successBox.style.display = 'block';
-            if (refCodeEl) refCodeEl.textContent = refNumber;
-            successBox.scrollIntoView({ behavior: 'smooth' });
-          }
-          return;
-        }
-      } catch (localErr) {}
-
+      console.error('Submission error:', err.message);
       statusEl.textContent = 'Transmission error. Please email us directly at blazebytestudio7@gmail.com or call +91 7708795342.';
       statusEl.className = 'enquiry-status error';
       submitBtn.disabled = false;

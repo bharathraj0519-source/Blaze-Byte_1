@@ -181,14 +181,89 @@
             Our website uses minimal essential session cookies required for security and navigation, alongside analytical cookies to measure aggregated visitor traffic. You can adjust your browser settings at any time to reject non-essential cookies.
           </p>
 
-          <h2 style="font-family:var(--font-heading);font-size:26px;color:#fff;margin-bottom:12px;">9. Contacting Our Data Privacy Officer</h2>
+          <h2 style="font-family:var(--font-heading);font-size:26px;color:#fff;margin-bottom:12px;">9. Third-Party SDK &amp; Sub-Processor Audit</h2>
+          <p style="margin-bottom:16px;">
+            In compliance with GDPR Article 28 and international security standards, we audit all third-party software development kits (SDKs), content networks, and hosting infrastructure. We do not sell or monetize client data. Below is our verified register of sub-processors:
+          </p>
+
+          <div style="overflow-x:auto;margin-bottom:28px;">
+            <table style="width:100%;border-collapse:collapse;font-size:14px;color:var(--text-body);background:rgba(255,255,255,0.02);border:1px solid var(--border-subtle);border-radius:8px;">
+              <thead>
+                <tr style="border-bottom:1px solid var(--border-subtle);background:rgba(0,0,0,0.25);text-align:left;">
+                  <th style="padding:12px 14px;color:var(--cyan);font-family:var(--font-mono);">SUB-PROCESSOR</th>
+                  <th style="padding:12px 14px;color:var(--cyan);font-family:var(--font-mono);">PURPOSE</th>
+                  <th style="padding:12px 14px;color:var(--cyan);font-family:var(--font-mono);">LOCATION</th>
+                  <th style="padding:12px 14px;color:var(--cyan);font-family:var(--font-mono);">COMPLIANCE CERTIFICATION</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+                  <td style="padding:12px 14px;font-weight:600;color:#fff;">Cloudflare, Inc.</td>
+                  <td style="padding:12px 14px;">DDoS Defense, Edge CDN &amp; WAF</td>
+                  <td style="padding:12px 14px;">United States / EU</td>
+                  <td style="padding:12px 14px;"><span class="badge badge-emerald" style="font-size:10px;">ISO 27001 &bull; SOC 2 TYPE II</span></td>
+                </tr>
+                <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+                  <td style="padding:12px 14px;font-weight:600;color:#fff;">Supabase, Inc.</td>
+                  <td style="padding:12px 14px;">Encrypted Customer Database</td>
+                  <td style="padding:12px 14px;">United States / AWS EU</td>
+                  <td style="padding:12px 14px;"><span class="badge badge-emerald" style="font-size:10px;">SOC 2 TYPE II &bull; HIPAA READY</span></td>
+                </tr>
+                <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+                  <td style="padding:12px 14px;font-weight:600;color:#fff;">Google Fonts (Alphabet)</td>
+                  <td style="padding:12px 14px;">Self-Contained Web Typography</td>
+                  <td style="padding:12px 14px;">Global Edge</td>
+                  <td style="padding:12px 14px;"><span class="badge badge-cyan" style="font-size:10px;">SIL OFL 1.1 &bull; NO COOKIES</span></td>
+                </tr>
+                <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+                  <td style="padding:12px 14px;font-weight:600;color:#fff;">Stripe / Razorpay</td>
+                  <td style="padding:12px 14px;">Tokenized Milestone Escrow Payments</td>
+                  <td style="padding:12px 14px;">Global / India</td>
+                  <td style="padding:12px 14px;"><span class="badge badge-emerald" style="font-size:10px;">PCI-DSS LEVEL 1 COMPLIANT</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 style="font-family:var(--font-heading);font-size:26px;color:#fff;margin-bottom:12px;">10. Data Minimization &amp; Retention Guarantee</h2>
+          <p style="margin-bottom:24px;">
+            In accordance with GDPR Article 5(1)(c), we practice <strong>strict data minimization</strong>: we never collect unneeded biometric data, physical location coordinates, or background device identifiers. Initial technical project inquiries that do not transition into an active commercial project agreement within ninety (90) days are automatically and permanently purged from our systems.
+          </p>
+
+          <!-- Interactive Data Deletion Request Form -->
+          <div style="background:rgba(244,63,94,0.04);border:1px solid rgba(244,63,94,0.3);border-radius:12px;padding:28px;margin-bottom:32px;">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+              <span style="font-size:22px;">🗑️</span>
+              <h3 style="font-family:var(--font-heading);font-size:22px;color:#fff;margin:0;">Request Data Deletion (GDPR Article 17 / DPDP Right to be Forgotten)</h3>
+            </div>
+            <p style="font-size:14px;color:var(--text-muted);line-height:1.6;margin-bottom:20px;">
+              You have the legal right to request the permanent erasure of your personal data, business contact information, and project consultation history. Submit your registered email below to execute a data purge:
+            </p>
+
+            <form id="dataDeletionForm" style="display:flex;flex-direction:column;gap:14px;max-width:560px;">
+              <div>
+                <label for="delEmail" style="display:block;font-size:13px;font-weight:600;color:#cbd5e1;margin-bottom:6px;">Registered Business Email *</label>
+                <input type="email" id="delEmail" name="email" required placeholder="alex@company.com" style="width:100%;padding:12px 16px;background:rgba(0,0,0,0.3);border:1px solid var(--border-subtle);border-radius:8px;color:#fff;font-family:var(--font-body);font-size:15px;outline:none;">
+              </div>
+              <div>
+                <label for="delRef" style="display:block;font-size:13px;font-weight:600;color:#cbd5e1;margin-bottom:6px;">Project Reference Number (Optional)</label>
+                <input type="text" id="delRef" name="referenceNumber" placeholder="e.g. BB-INTL-123456" style="width:100%;padding:12px 16px;background:rgba(0,0,0,0.3);border:1px solid var(--border-subtle);border-radius:8px;color:#fff;font-family:var(--font-body);font-size:15px;outline:none;">
+              </div>
+              <button class="btn btn-outline" id="delSubmitBtn" type="submit" style="align-self:flex-start;min-height:46px;padding:0 24px;border-color:var(--rose);color:#fff;">
+                Execute Data Erasure Request
+              </button>
+              <div id="delStatus" style="font-size:14px;margin-top:6px;display:none;"></div>
+            </form>
+          </div>
+
+          <h2 style="font-family:var(--font-heading);font-size:26px;color:#fff;margin-bottom:12px;">11. Contacting Our Data Privacy Officer</h2>
           <p style="margin-bottom:0;">
-            To exercise your privacy rights, request data erasure, or submit inquiries regarding our privacy compliance practices, contact us at:
+            To exercise your privacy rights, submit verification credentials, or contact our appointed Data Protection Officer (DPO):
             <br><br>
             <strong>BlazeByte Studio</strong><br>
-            Attn: Data Protection Officer<br>
-            Email: <a href="mailto:blazebytestudio7@gmail.com" style="color:var(--cyan);">blazebytestudio7@gmail.com</a><br>
-            Direct Phone: +91 7708795342<br>
+            Attn: Data Protection Officer (DPO)<br>
+            Direct Email: <a href="mailto:blazebytestudio7@gmail.com" style="color:var(--cyan);">blazebytestudio7@gmail.com</a><br>
+            Escalation WhatsApp / Phone: <a href="tel:+917708795342" style="color:#fff;">+91 7708795342</a><br>
             Headquarters: Coimbatore, Tamil Nadu, India
           </p>
 
@@ -238,19 +313,19 @@
         </div>
 
         <div class="footer-col">
-          <h4>Legal &amp; Privacy</h4>
+          <h4>Legal &amp; Trust</h4>
           <ul class="footer-links">
             <li><a href="privacy-policy.html">Privacy Policy</a></li>
             <li><a href="terms-of-service.html">Terms of Service</a></li>
-            <li><a href="security.html">Security Policy</a></li>
-            <li><a href="mailto:blazebytestudio7@gmail.com">blazebytestudio7@gmail.com</a></li>
-            <li><a href="tel:+917708795342">+91 7708795342</a></li>
+            <li><a href="refund-policy.html">Refund Policy</a></li>
+            <li><a href="cookie-policy.html">Cookie Policy</a></li>
+            <li><a href="security.html">Security Center</a></li>
           </ul>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <div>&copy; 2026 BlazeByte Studio. All rights reserved. &bull; <a href="privacy-policy.html" style="color:var(--text-muted);">Privacy Policy</a> &bull; <a href="terms-of-service.html" style="color:var(--text-muted);">Terms of Service</a> &bull; <a href="security.html" style="color:var(--text-muted);">Security</a> &bull; <a href="sitemap.xml" style="color:var(--text-muted);">Sitemap</a></div>
+        <div>&copy; 2026 BlazeByte Studio. All rights reserved. &bull; <a href="privacy-policy.html" style="color:var(--text-muted);">Privacy</a> &bull; <a href="terms-of-service.html" style="color:var(--text-muted);">Terms</a> &bull; <a href="refund-policy.html" style="color:var(--text-muted);">Refunds</a> &bull; <a href="cookie-policy.html" style="color:var(--text-muted);">Cookies</a> &bull; <a href="#" id="openFooterCookieSettings" style="color:var(--cyan);">Cookie Settings</a> &bull; <a href="sitemap.xml" style="color:var(--text-muted);">Sitemap</a></div>
         <div class="footer-markets">Target Markets: USA &bull; UK &bull; Canada &bull; Australia &bull; UAE &bull; Europe &bull; Worldwide</div>
       </div>
     </div>
@@ -259,5 +334,49 @@
   <script src="js/pricing-data.js"></script>
   <script src="js/main.js"></script>
   <script src="js/chatbot-demo.js"></script>
+  <script src="js/cookie-consent.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const delForm = document.getElementById('dataDeletionForm');
+      if (!delForm) return;
+      const delBtn = document.getElementById('delSubmitBtn');
+      const delStatus = document.getElementById('delStatus');
+
+      delForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('delEmail').value.trim();
+        const ref = document.getElementById('delRef').value.trim();
+        if (!email) return;
+
+        delBtn.disabled = true;
+        delBtn.textContent = 'Processing Erasure...';
+        delStatus.style.display = 'block';
+        delStatus.style.color = 'var(--cyan)';
+        delStatus.textContent = 'Verifying and executing deletion request...';
+
+        try {
+          const res = await fetch('/api/data-deletion', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, referenceNumber: ref, reason: 'Right to be Forgotten request' })
+          });
+          const data = await res.json();
+          if (res.ok && data.success) {
+            delStatus.style.color = 'var(--emerald)';
+            delStatus.textContent = '✓ ' + (data.message || 'Data deletion request executed successfully.');
+            delForm.reset();
+          } else {
+            throw new Error(data.error || 'Deletion failed');
+          }
+        } catch (err) {
+          delStatus.style.color = 'var(--rose)';
+          delStatus.textContent = 'Notice: Erasure request could not be executed automatically. Please email our DPO directly at blazebytestudio7@gmail.com.';
+        } finally {
+          delBtn.disabled = false;
+          delBtn.textContent = 'Execute Data Erasure Request';
+        }
+      });
+    });
+  </script>
 </body>
 </html>

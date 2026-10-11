@@ -1,38 +1,57 @@
 # ==============================================================================
 # BLAZEBYTE STUDIO — ENTERPRISE SECURITY & PERFORMANCE CONFIGURATION
+# High-Hardening Web Server Directives (.htaccess)
 # ==============================================================================
 
-# 1. SECURITY HEADERS
+# 1. ENTERPRISE SECURITY HEADERS
 <IfModule mod_headers.c>
     Header always set X-Content-Type-Options "nosniff"
     Header always set X-Frame-Options "SAMEORIGIN"
     Header always set X-XSS-Protection "1; mode=block"
     Header always set Referrer-Policy "strict-origin-when-cross-origin"
-    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
     Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-    Header always set Content-Security-Policy "default-src 'self' 'unsafe-inline' https: data: blob:; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; media-src 'self' https: blob:; connect-src 'self' https: ws:;"
+    Header always set Content-Security-Policy "default-src 'self' 'unsafe-inline' https: data: blob:; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; media-src 'self' https: blob:; connect-src 'self' https: ws:; frame-ancestors 'none'; base-uri 'self'; object-src 'none';"
+    Header always set Cross-Origin-Opener-Policy "same-origin"
+    Header always set Cross-Origin-Resource-Policy "same-origin"
 </IfModule>
 
 # 2. DISABLE DIRECTORY BROWSING
 Options -Indexes
 
-# 3. BLOCK ACCESS TO SENSITIVE FILES
+# 3. BLOCK ACCESS TO SENSITIVE DOTFILES & HIDDEN FILES
 <FilesMatch "^\.">
     Order allow,deny
     Deny from all
 </FilesMatch>
 
-<FilesMatch "(^#.*#|\.(bak|config|dist|fla|inc|ini|log|psd|sh|sql|sw[op]|zip))$">
+# Allow RFC 9116 security.txt in .well-known
+<Files ".well-known/security.txt">
+    Allow from all
+</Files>
+
+# 4. BLOCK ACCESS TO SYSTEM, DATA, AND SCRIPT FILES
+<FilesMatch "(^#.*#|\.(bak|config|dist|fla|inc|ini|log|psd|sh|sql|sw[op]|zip|env|example|json|lock))$">
     Order allow,deny
     Deny from all
 </FilesMatch>
 
-# 4. GZIP COMPRESSION
+# Specifically deny server scripts from public download
+<FilesMatch "^(server\.js|build-deploy\.js|verify-.*\.js|test-.*\.js|package\.json)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Block data directory
+RedirectMatch 403 ^/data(/|$)
+RedirectMatch 403 ^/chrome-test-profile(/|$)
+
+# 5. GZIP COMPRESSION FOR HIGH PERFORMANCE
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json image/svg+xml
 </IfModule>
 
-# 5. BROWSER CACHE-CONTROL
+# 6. BROWSER CACHE-CONTROL FOR STATIC ASSETS
 <IfModule mod_expires.c>
     ExpiresActive On
     ExpiresDefault "access plus 1 month"

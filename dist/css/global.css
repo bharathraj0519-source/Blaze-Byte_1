@@ -14,10 +14,10 @@
   --border-card: rgba(168, 85, 247, 0.22);
   --border-active: rgba(0, 245, 255, 0.65);
   
-  --text-main: #fbf9ff;
-  --text-body: #d1c8e8;
-  --text-muted: #9b8eb8;
-  --text-dim: #675886;
+  --text-main: #ffffff;
+  --text-body: #e2daf8;
+  --text-muted: #baaed8;
+  --text-dim: #9d8ec2;
   
   --cyan: #00f5ff;
   --cyan-glow: rgba(0, 245, 255, 0.35);
@@ -36,6 +36,16 @@
   --container-max: 1320px;
   --transition-fast: 0.18s ease;
   --transition-smooth: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:focus-visible {
+  outline: 2px solid var(--cyan) !important;
+  outline-offset: 3px !important;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #9d8ec2 !important;
+  opacity: 1 !important;
 }
 
 *, *::before, *::after {

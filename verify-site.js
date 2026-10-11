@@ -18,6 +18,8 @@ const PAGES = [
   'security.html',
   'privacy-policy.html',
   'terms-of-service.html',
+  'refund-policy.html',
+  'cookie-policy.html',
   'sitemap.xml',
   'robots.txt',
   '.well-known/security.txt',
