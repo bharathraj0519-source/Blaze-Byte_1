@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 160" width="100%" height="100%" fill="none">
+  <defs>
+    <linearGradient id="darkBlazeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6D00"/>
+      <stop offset="50%" stop-color="#FF2A6D"/>
+      <stop offset="100%" stop-color="#05D9E8"/>
+    </linearGradient>
+    <linearGradient id="neonPlane" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF9E00"/>
+      <stop offset="100%" stop-color="#FF2A6D"/>
+    </linearGradient>
+    <filter id="neonGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Left Icon Mark -->
+  <g transform="translate(30, 20)">
+    <!-- Drawing Tablet -->
+    <g transform="translate(0, 10)">
+      <!-- Outer Tablet Body -->
+      <rect x="0" y="10" width="85" height="100" rx="12" fill="#0B0F19" stroke="#334155" stroke-width="3"/>
+      <!-- Inner Active Screen Area -->
+      <rect x="22" y="18" width="55" height="84" rx="6" fill="#1E293B" stroke="#475569" stroke-width="1.5"/>
+      <!-- Corner marks -->
+      <path d="M 28 26 L 33 26 M 28 26 L 28 31" stroke="#64748B" stroke-width="1.5"/>
+      <path d="M 71 26 L 66 26 M 71 26 L 71 31" stroke="#64748B" stroke-width="1.5"/>
+      <!-- Tablet Express Keys -->
+      <rect x="7" y="24" width="8" height="14" rx="3" fill="#334155"/>
+      <circle cx="11" cy="48" r="4.5" fill="none" stroke="#FF6D00" stroke-width="2.5"/>
+      <rect x="7" y="62" width="8" height="14" rx="3" fill="#334155"/>
+      <rect x="7" y="82" width="8" height="14" rx="3" fill="#334155"/>
+
+      <!-- Stylus / Pen -->
+      <g transform="translate(15, 102) rotate(-15)">
+        <rect x="0" y="0" width="60" height="7" rx="3.5" fill="#334155"/>
+        <path d="M 60 1.5 L 68 3.5 L 60 5.5 Z" fill="#FF6D00"/>
+        <line x1="12" y1="0" x2="12" y2="7" stroke="#94A3B8" stroke-width="1.5"/>
+      </g>
+    </g>
+
+    <!-- Flight trail -->
+    <path d="M 65 60 C 85 45, 80 15, 96 10" fill="none" stroke="url(#darkBlazeGrad)" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 4"/>
+
+    <!-- Paper Airplane with Neon Glow -->
+    <g transform="translate(80, -8)" filter="url(#neonGlow)">
+      <polygon points="50,0 0,38 18,22" fill="url(#neonPlane)"/>
+      <polygon points="50,0 18,22 25,32" fill="#D81B60"/>
+      <polygon points="50,0 25,32 38,20" fill="#FF6D00"/>
+      <polygon points="50,0 0,38 25,32" fill="none" stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round"/>
+    </g>
+  </g>
+
+  <!-- Divider Line -->
+  <line x1="200" y1="35" x2="200" y2="125" stroke="#334155" stroke-width="2"/>
+
+  <!-- Typography -->
+  <g transform="translate(230, 25)">
+    <!-- BLAZEBYTE -->
+    <text x="0" y="65" font-family="'Inter', 'Montserrat', 'Helvetica Neue', 'Segoe UI', sans-serif" font-weight="900" font-size="52" letter-spacing="4" fill="#F8FAFC">
+      BLAZE<tspan fill="url(#darkBlazeGrad)">BYTE</tspan>
+    </text>
+    
+    <!-- STUDIO Subtitle -->
+    <text x="4" y="98" font-family="'Inter', 'Montserrat', 'Helvetica Neue', 'Segoe UI', sans-serif" font-weight="600" font-size="20" letter-spacing="14" fill="#94A3B8">
+      STUDIO
+    </text>
+
+    <!-- Accent Underline -->
+    <rect x="4" y="108" width="56" height="3" rx="1.5" fill="url(#darkBlazeGrad)"/>
+  </g>
+</svg>
