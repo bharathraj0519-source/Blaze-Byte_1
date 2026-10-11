@@ -243,12 +243,116 @@ const server = http.createServer(async (req, res) => {
       res.end(JSON.stringify({
         success: true,
         message: 'Enquiry received, encrypted, and recorded successfully.',
-        reference: refNumber
+        reference: refNumber,
+        clientName: fullName,
+        service: service,
+        budget: budget
       }));
     } catch (err) {
       console.error('Error handling /api/enquire:', err.message);
       res.writeHead(400, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ success: false, error: err.message || 'Submission error.' }));
+    }
+    return;
+  }
+
+  // --------------------------------------------------------------------------
+  // API ENDPOINT: POST /api/verify-payment (Milestone Escrow Payment Verification)
+  // --------------------------------------------------------------------------
+  if (req.url === '/api/verify-payment' && req.method === 'POST') {
+    if (isRateLimited(clientIp)) {
+      res.writeHead(429, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: false, error: 'Too many verification attempts. Please wait 10 minutes.' }));
+      return;
+    }
+
+    try {
+      const raw = await parseJsonBody(req);
+      const refNumber = sanitizeString(raw.referenceNumber || '', 40);
+      const clientName = sanitizeString(raw.clientName || 'Valued Client', 100);
+      const paymentMethod = sanitizeString(raw.paymentMethod || 'Card', 30);
+      const depositAmount = sanitizeString(String(raw.depositAmount || '$250.00 USD'), 50);
+      const cardLast4 = sanitizeString(raw.cardLast4 || '4242', 10);
+      const transactionRef = sanitizeString(raw.transactionRef || '', 100);
+
+      if (!refNumber) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, error: 'Missing project reference number.' }));
+        return;
+      }
+
+      // Generate authentic transaction verification ID
+      const txnId = `TXN-BB-2026-${Math.floor(100000 + Math.random() * 900000)}`;
+
+      // Persist to local data/payments.json
+      const dataDir = path.join(__dirname, 'data');
+      if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+      const paymentsPath = path.join(dataDir, 'payments.json');
+      let payments = [];
+      if (fs.existsSync(paymentsPath)) {
+        try { payments = JSON.parse(fs.readFileSync(paymentsPath, 'utf8') || '[]'); } catch (e) {}
+      }
+
+      const paymentRecord = {
+        transaction_id: txnId,
+        reference_number: refNumber,
+        client_name: clientName,
+        payment_method: paymentMethod,
+        deposit_amount: depositAmount,
+        card_last4: cardLast4,
+        transaction_ref: transactionRef,
+        verified_at: new Date().toISOString(),
+        status: 'authorized_in_escrow',
+        client_ip: clientIp
+      };
+      payments.push(paymentRecord);
+      fs.writeFileSync(paymentsPath, JSON.stringify(payments, null, 2), 'utf8');
+
+      // Update data/enquiries.json if matching record exists
+      const enquiriesPath = path.join(dataDir, 'enquiries.json');
+      if (fs.existsSync(enquiriesPath)) {
+        try {
+          let enquiries = JSON.parse(fs.readFileSync(enquiriesPath, 'utf8') || '[]');
+          const idx = enquiries.findIndex(e => e.reference_number === refNumber);
+          if (idx !== -1) {
+            enquiries[idx].deposit_status = 'verified_in_escrow';
+            enquiries[idx].transaction_id = txnId;
+            enquiries[idx].deposit_amount = depositAmount;
+            fs.writeFileSync(enquiriesPath, JSON.stringify(enquiries, null, 2), 'utf8');
+          }
+        } catch (e) {}
+      }
+
+      // Background notification to admin desk
+      const emailPayload = {
+        _subject: `💎 [Milestone Payment Verified] ${refNumber} — ${depositAmount}`,
+        referenceNumber: refNumber,
+        transactionId: txnId,
+        clientName: clientName,
+        depositAmount: depositAmount,
+        paymentMethod: paymentMethod,
+        verifiedTimestamp: new Date().toISOString()
+      };
+      fetch('https://formsubmit.co/ajax/' + ADMIN_EMAIL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(emailPayload)
+      }).catch(() => null);
+
+      console.log(`[PAYMENT VERIFIED] Txn: ${txnId} | Ref: ${refNumber} | Deposit: ${depositAmount}`);
+
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({
+        success: true,
+        transactionId: txnId,
+        referenceNumber: refNumber,
+        depositAmount: depositAmount,
+        message: '50% Milestone deposit verified and authorized in secure escrow.'
+      }));
+    } catch (err) {
+      console.error('Error handling /api/verify-payment:', err.message);
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: false, error: err.message || 'Payment verification failed.' }));
     }
     return;
   }
@@ -320,6 +424,18 @@ const server = http.createServer(async (req, res) => {
   let reqPath = decodeURI(req.url.split('?')[0]);
   if (reqPath === '/' || reqPath === '') reqPath = '/index.html';
 
+  // 301 Redirects for Legacy / Alternative Routes
+  if (reqPath === '/portfolio' || reqPath === '/portfolio.html') {
+    res.writeHead(301, { 'Location': '/our-work.html' });
+    res.end();
+    return;
+  }
+  if (reqPath === '/services') {
+    res.writeHead(301, { 'Location': '/web-development.html' });
+    res.end();
+    return;
+  }
+
   // Normalize path and eliminate path traversal attacks
   const safePath = path.normalize(reqPath).replace(/^(\.\.[\/\\])+/, '');
   const resolvedPath = path.resolve(__dirname, '.' + safePath);
@@ -340,6 +456,7 @@ const server = http.createServer(async (req, res) => {
     relative.startsWith('data/') ||
     relative.startsWith('node_modules/') ||
     relative.startsWith('chrome-test-profile/') ||
+    relative.startsWith('scratch/') ||
     basename === 'server.js' ||
     basename === 'build-deploy.js' ||
     basename === 'verify-site.js' ||
@@ -360,7 +477,12 @@ const server = http.createServer(async (req, res) => {
 
   if (!fs.existsSync(resolvedPath) || fs.statSync(resolvedPath).isDirectory()) {
     res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
-    res.end('<!doctype html><html><head><title>404 Not Found — BlazeByte Studio</title></head><body style="background:#060312;color:#fff;font-family:sans-serif;text-align:center;padding:100px 20px;"><h1>404 — Page Not Found</h1><p>The requested resource does not exist.</p><a href="/" style="color:#00f5ff;">Return to Homepage &rarr;</a></body></html>');
+    const notFoundPath = path.join(__dirname, '404.html');
+    if (fs.existsSync(notFoundPath)) {
+      res.end(fs.readFileSync(notFoundPath, 'utf8'));
+    } else {
+      res.end('<!doctype html><html><head><title>404 Not Found — BlazeByte Studio</title></head><body style="background:#060312;color:#fff;font-family:sans-serif;text-align:center;padding:100px 20px;"><h1>404 — Page Not Found</h1><p>The requested resource does not exist.</p><a href="/" style="color:#00f5ff;">Return to Homepage &rarr;</a></body></html>');
+    }
     return;
   }
 

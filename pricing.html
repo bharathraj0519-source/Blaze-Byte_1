@@ -26,6 +26,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lateef:wght@400;500;600;700;800&family=Rajdhani:wght@500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="alternate icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="assets/blazebyte-logo.png">
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/chatbot.css">
 
@@ -59,9 +61,11 @@
 <body>
 
   <!-- Site Header -->
+    <!-- Site Header with International Mega-Dropdown -->
+    <!-- Site Header with International Mega-Dropdown -->
   <header class="site-header">
     <div class="wrap nav-inner">
-      <a class="brand-link" href="index.html">
+      <a class="brand-link" href="index.html" aria-label="BlazeByte Studio Home">
         <img src="assets/blazebyte-logo.png" alt="BlazeByte Studio Logo">
         <div>
           <span>BLAZEBYTE STUDIO</span>
@@ -111,7 +115,7 @@
             </div>
           </li>
 
-          <li class="nav-item"><a class="nav-link" href="ai-solutions.html">AI Solutions</a></li>
+          <li class="nav-item"><a class="nav-link" href="solutions.html">Solutions</a></li>
           <li class="nav-item"><a class="nav-link" href="our-work.html">Our Work</a></li>
           <li class="nav-item active"><a class="nav-link" href="pricing.html">Pricing</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
@@ -120,7 +124,7 @@
       </nav>
 
       <div class="nav-actions">
-        <a class="btn btn-primary" href="contact.html" style="min-height:44px;padding:0 20px;font-size:14px;">Get Custom Quote</a>
+        <a class="btn btn-primary" href="contact.html" style="min-height:44px;padding:0 20px;font-size:14px;">Start Project</a>
         <button class="mobile-nav-toggle" type="button" aria-label="Toggle Navigation Menu">☰</button>
       </div>
     </div>
@@ -275,34 +279,51 @@
   </main>
 
   <!-- Global Footer -->
+    <!-- Global Footer -->
+    <!-- Global Footer -->
   <footer class="site-footer">
     <div class="wrap">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a class="brand-link" href="index.html">
+          <a class="brand-link" href="index.html" aria-label="BlazeByte Studio Home">
             <img src="assets/blazebyte-logo.png" alt="BlazeByte Studio Logo">
             <span>BLAZEBYTE STUDIO</span>
           </a>
-          <p>Global digital solutions and technology partner. We engineer high-performance websites, performance marketing campaigns, intelligent AI agents, and custom application software.</p>
+          <p>
+            Global digital solutions and technology partner. We engineer high-performance websites, performance marketing campaigns, intelligent AI agents, and custom application software.
+          </p>
+          <div class="footer-hq-badge">
+            <span class="dot"></span>
+            <span>HQ: Coimbatore, Tamil Nadu, India &bull; Serving Global Markets</span>
+          </div>
+          <div class="footer-contacts" style="margin-top:14px;display:flex;flex-direction:column;gap:8px;font-size:13px;">
+            <a href="mailto:blazebytestudio7@gmail.com" style="color:var(--cyan);text-decoration:none;display:inline-flex;align-items:center;gap:6px;"><span aria-hidden="true">✉</span> blazebytestudio7@gmail.com</a>
+            <a href="tel:+917708795342" style="color:#cbd5e1;text-decoration:none;display:inline-flex;align-items:center;gap:6px;"><span aria-hidden="true">☎</span> +91 77087 95342</a>
+          </div>
         </div>
+
         <div class="footer-col">
           <h4>Four Divisions</h4>
           <ul class="footer-links">
             <li><a href="web-development.html">Web Development</a></li>
             <li><a href="digital-marketing.html">Digital Marketing</a></li>
             <li><a href="ai-solutions.html">AI Solutions</a></li>
+            <li><a href="ai-chatbots.html">AI Chatbots Showcase</a></li>
             <li><a href="custom-applications.html">Custom Applications</a></li>
           </ul>
         </div>
+
         <div class="footer-col">
-          <h4>Company</h4>
+          <h4>Company &amp; Work</h4>
           <ul class="footer-links">
             <li><a href="about.html">About Us</a></li>
-            <li><a href="our-work.html">Our Work</a></li>
-            <li><a href="pricing.html">Pricing Hub</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="our-work.html">Verified Portfolio</a></li>
+            <li><a href="solutions.html">Industries &amp; Solutions</a></li>
+            <li><a href="pricing.html">Global Pricing Hub</a></li>
+            <li><a href="contact.html">Project Consultation</a></li>
           </ul>
         </div>
+
         <div class="footer-col">
           <h4>Legal &amp; Trust</h4>
           <ul class="footer-links">
@@ -314,9 +335,10 @@
           </ul>
         </div>
       </div>
+
       <div class="footer-bottom">
         <div>&copy; 2026 BlazeByte Studio. All rights reserved. &bull; <a href="privacy-policy.html" style="color:var(--text-muted);">Privacy</a> &bull; <a href="terms-of-service.html" style="color:var(--text-muted);">Terms</a> &bull; <a href="refund-policy.html" style="color:var(--text-muted);">Refunds</a> &bull; <a href="cookie-policy.html" style="color:var(--text-muted);">Cookies</a> &bull; <a href="#" id="openFooterCookieSettings" style="color:var(--cyan);">Cookie Settings</a> &bull; <a href="sitemap.xml" style="color:var(--text-muted);">Sitemap</a></div>
-        <div class="footer-markets">Serving International Clients Globally</div>
+        <div class="footer-markets">Target Markets: USA &bull; UK &bull; Canada &bull; Australia &bull; UAE &bull; Europe &bull; Worldwide</div>
       </div>
     </div>
   </footer>

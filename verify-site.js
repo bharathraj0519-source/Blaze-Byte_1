@@ -20,6 +20,7 @@ const PAGES = [
   'terms-of-service.html',
   'refund-policy.html',
   'cookie-policy.html',
+  '404.html',
   'sitemap.xml',
   'robots.txt',
   '.well-known/security.txt',

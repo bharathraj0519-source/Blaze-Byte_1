@@ -26,6 +26,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lateef:wght@400;500;600;700;800&family=Rajdhani:wght@500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="alternate icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="assets/blazebyte-logo.png">
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/chatbot.css">
   <link rel="stylesheet" href="css/custom-select.css">
@@ -129,11 +131,39 @@
     .enquiry-success-box {
       display: none;
       text-align: center;
-      padding: 50px 30px;
+      padding: 44px 28px;
       border: 1px solid rgba(16, 185, 129, 0.4);
       border-radius: 18px;
       background: rgba(16, 185, 129, 0.05);
       box-shadow: 0 0 40px rgba(16, 185, 129, 0.15);
+    }
+    .payment-verification-box {
+      display: none;
+      padding: 8px 0;
+    }
+    .pay-method-pill {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      user-select: none;
+    }
+    .pay-method-pill:hover,
+    .pay-method-pill.active {
+      border-color: var(--cyan);
+      background: rgba(0, 245, 255, 0.08);
+      color: #fff;
+      box-shadow: 0 0 16px rgba(0, 245, 255, 0.2);
     }
     @media (max-width: 640px) {
       .form-grid {
@@ -148,9 +178,11 @@
 <body>
 
   <!-- Site Header -->
+    <!-- Site Header with International Mega-Dropdown -->
+    <!-- Site Header with International Mega-Dropdown -->
   <header class="site-header">
     <div class="wrap nav-inner">
-      <a class="brand-link" href="index.html">
+      <a class="brand-link" href="index.html" aria-label="BlazeByte Studio Home">
         <img src="assets/blazebyte-logo.png" alt="BlazeByte Studio Logo">
         <div>
           <span>BLAZEBYTE STUDIO</span>
@@ -200,7 +232,7 @@
             </div>
           </li>
 
-          <li class="nav-item"><a class="nav-link" href="ai-solutions.html">AI Solutions</a></li>
+          <li class="nav-item"><a class="nav-link" href="solutions.html">Solutions</a></li>
           <li class="nav-item"><a class="nav-link" href="our-work.html">Our Work</a></li>
           <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
@@ -239,17 +271,152 @@
           
           <!-- Central Enquiry Form Card -->
           <div class="card" style="padding:44px;">
+            <!-- Final Confirmed Project & Deposit Success Box -->
             <div id="enquirySuccessBox" class="enquiry-success-box">
-              <div style="width:68px;height:68px;border-radius:50%;background:rgba(16,185,129,0.2);border:2px solid var(--emerald);color:var(--emerald);font-size:32px;display:grid;place-items:center;margin:0 auto 16px;">✓</div>
-              <h3 style="font-family:var(--font-heading);font-size:28px;color:#fff;margin-bottom:8px;">Project Inquiry Received!</h3>
-              <p style="font-size:15px;color:var(--text-muted);line-height:1.6;margin-bottom:18px;">
-                Thank you for considering BlazeByte Studio. Your scope has been routed to our global desk. A senior product director will review your requirements and follow up via your preferred contact channel within 24 hours.
+              <div style="width:72px;height:72px;border-radius:50%;background:rgba(16,185,129,0.2);border:2px solid var(--emerald);color:var(--emerald);font-size:36px;display:grid;place-items:center;margin:0 auto 16px;">✓</div>
+              <div class="badge badge-emerald" style="margin-bottom:12px;">50% MILESTONE DEPOSIT VERIFIED &amp; ESCROW SECURED</div>
+              <h3 style="font-family:var(--font-heading);font-size:30px;color:#fff;margin-bottom:8px;">Project Inquiry &amp; Escrow Confirmed!</h3>
+              <p style="font-size:15px;color:var(--text-muted);line-height:1.6;margin-bottom:20px;">
+                Thank you for choosing BlazeByte Studio. Your project scope has been registered, and your 50% milestone escrow authorization has been successfully verified. A formal statement of work and kickoff invitation have been queued for your inbox.
               </p>
-              <div style="padding:12px 20px;background:rgba(255,255,255,0.04);border-radius:8px;font-family:var(--font-mono);font-size:13px;display:inline-block;margin-bottom:24px;">
-                Reference Number: <strong style="color:var(--cyan);" id="enquiryRefCode">BB-INTL-000000</strong>
+
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;text-align:left;background:rgba(255,255,255,0.03);border:1px solid rgba(16,185,129,0.3);border-radius:10px;padding:16px 20px;margin-bottom:24px;">
+                <div>
+                  <span style="font-size:11px;font-family:var(--font-mono);color:var(--text-dim);display:block;">PROJECT REFERENCE</span>
+                  <strong style="color:var(--cyan);font-family:var(--font-mono);font-size:14px;" id="enquiryRefCode">BB-INTL-000000</strong>
+                </div>
+                <div>
+                  <span style="font-size:11px;font-family:var(--font-mono);color:var(--text-dim);display:block;">PAYMENT AUTH RECEIPT</span>
+                  <strong style="color:var(--emerald);font-family:var(--font-mono);font-size:14px;" id="enquiryTxnCode">TXN-BB-2026-000000</strong>
+                </div>
+                <div>
+                  <span style="font-size:11px;font-family:var(--font-mono);color:var(--text-dim);display:block;">DEPOSIT AUTHORIZED (50%)</span>
+                  <strong style="color:#fff;font-family:var(--font-mono);font-size:14px;" id="enquiryDepositPaid">$250.00 USD</strong>
+                </div>
+                <div>
+                  <span style="font-size:11px;font-family:var(--font-mono);color:var(--text-dim);display:block;">REMAINING BALANCE (50%)</span>
+                  <strong style="color:#cbd5e1;font-family:var(--font-mono);font-size:14px;" id="enquiryBalanceDue">$250.00 USD (On Approval)</strong>
+                </div>
               </div>
-              <br>
-              <a class="btn btn-outline" href="index.html">Return to Homepage</a>
+
+              <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;">
+                <a class="btn btn-primary" href="index.html">Return to Homepage</a>
+                <a class="btn btn-outline" href="our-work.html">Explore Case Studies</a>
+              </div>
+            </div>
+
+            <!-- Step 2: Payment Verification Step (Before Showing Success) -->
+            <div id="paymentVerificationContainer" class="payment-verification-box">
+              <div class="anime-hud-pill" style="margin-bottom:12px;">
+                <span class="pulse-dot"></span>
+                MILESTONE ESCROW VERIFICATION &bull; STEP 2 OF 2
+              </div>
+              <h3 style="font-family:var(--font-heading);font-size:26px;color:#fff;margin-bottom:8px;">
+                Authorize 50% Milestone Deposit
+              </h3>
+              <p style="font-size:14px;color:var(--text-muted);margin-bottom:20px;line-height:1.5;">
+                To secure your engineering sprint slot and begin architectural discovery, please verify and authorize the 50% upfront milestone deposit. The remaining 50% balance is payable strictly after final staging delivery and your signed approval.
+              </p>
+
+              <!-- Escrow Summary Card -->
+              <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(0,245,255,0.25);border-radius:12px;padding:20px;margin-bottom:24px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
+                  <span style="font-size:13px;color:var(--text-muted);font-family:var(--font-mono);">PROJECT REFERENCE:</span>
+                  <strong style="color:var(--cyan);font-family:var(--font-mono);font-size:14px;" id="pvRefNumber">BB-INTL-000000</strong>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
+                  <span style="font-size:13px;color:var(--text-muted);">CLIENT &amp; SERVICE:</span>
+                  <strong style="color:#fff;font-size:14px;" id="pvClientService">Client &bull; Web Development</strong>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px dashed rgba(255,255,255,0.1);flex-wrap:wrap;gap:8px;">
+                  <span style="font-size:14px;color:#cbd5e1;font-weight:600;">50% MILESTONE KICKOFF DEPOSIT:</span>
+                  <strong style="color:var(--emerald);font-family:var(--font-heading);font-size:24px;" id="pvDepositAmount">$250.00 USD</strong>
+                </div>
+                <div style="font-size:12px;color:var(--text-dim);font-family:var(--font-mono);margin-top:6px;">
+                  🛡️ Balance of <span id="pvRemainingBalance">$250.00 USD</span> held until complete milestone sign-off.
+                </div>
+              </div>
+
+              <form id="paymentVerificationForm">
+                <!-- Payment Method Selector -->
+                <div class="form-group" style="margin-bottom:18px;">
+                  <label style="font-size:13px;font-weight:600;color:#cbd5e1;margin-bottom:6px;">Payment Verification Method *</label>
+                  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;">
+                    <label class="pay-method-pill active" id="payMethodCard">
+                      <input type="radio" name="payMethod" value="Card" checked style="display:none;">
+                      <span style="font-size:16px;">💳</span>
+                      <span>Card Gateway</span>
+                    </label>
+                    <label class="pay-method-pill" id="payMethodWire">
+                      <input type="radio" name="payMethod" value="Wire" style="display:none;">
+                      <span style="font-size:16px;">🏦</span>
+                      <span>Wire / SWIFT</span>
+                    </label>
+                    <label class="pay-method-pill" id="payMethodCrypto">
+                      <input type="radio" name="payMethod" value="Crypto" style="display:none;">
+                      <span style="font-size:16px;">🔐</span>
+                      <span>Escrow Pay</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Dynamic Card Fields -->
+                <div id="cardFieldsContainer" class="form-grid" style="margin-bottom:18px;">
+                  <div class="form-group full">
+                    <label for="pvCardName">Cardholder Name *</label>
+                    <input type="text" id="pvCardName" placeholder="Name as shown on card" autocomplete="cc-name">
+                  </div>
+                  <div class="form-group full">
+                    <label for="pvCardNumber">Card Number *</label>
+                    <input type="text" id="pvCardNumber" placeholder="4242 •••• •••• 4242" maxlength="19" autocomplete="cc-number">
+                  </div>
+                  <div class="form-group">
+                    <label for="pvCardExpiry">Expiration (MM/YY) *</label>
+                    <input type="text" id="pvCardExpiry" placeholder="12/28" maxlength="5" autocomplete="cc-exp">
+                  </div>
+                  <div class="form-group">
+                    <label for="pvCardCvc">CVC / Security Code *</label>
+                    <input type="password" id="pvCardCvc" placeholder="123" maxlength="4" autocomplete="cc-csc">
+                  </div>
+                </div>
+
+                <!-- Wire Transfer Info (Hidden by default) -->
+                <div id="wireFieldsContainer" style="display:none;background:rgba(255,255,255,0.02);border:1px solid var(--border-subtle);border-radius:10px;padding:16px;margin-bottom:18px;font-size:13px;color:var(--text-muted);line-height:1.6;">
+                  <p style="color:#fff;font-weight:600;margin-bottom:6px;">International SWIFT / Wire Escrow Instructions:</p>
+                  <div>&bull; <strong>Beneficiary:</strong> BlazeByte Studio Global Tech Desk</div>
+                  <div>&bull; <strong>Account / Routing:</strong> Provided on generated invoice</div>
+                  <div style="margin-top:10px;">
+                    <label for="pvWireRef" style="display:block;font-size:12px;color:#cbd5e1;margin-bottom:4px;">Wire Transfer Transaction Reference / Bank Voucher ID *</label>
+                    <input type="text" id="pvWireRef" placeholder="e.g. SWIFT-REF-2026-98124" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border-subtle);border-radius:8px;padding:10px 14px;color:#fff;">
+                  </div>
+                </div>
+
+                <!-- Crypto Escrow Info (Hidden by default) -->
+                <div id="cryptoFieldsContainer" style="display:none;background:rgba(255,255,255,0.02);border:1px solid var(--border-subtle);border-radius:10px;padding:16px;margin-bottom:18px;font-size:13px;color:var(--text-muted);line-height:1.6;">
+                  <p style="color:#fff;font-weight:600;margin-bottom:6px;">USDT / USDC Multi-Sig Escrow:</p>
+                  <div>&bull; <strong>Network:</strong> Ethereum (ERC-20) / Polygon / Arbitrum</div>
+                  <div style="margin-top:10px;">
+                    <label for="pvCryptoTxHash" style="display:block;font-size:12px;color:#cbd5e1;margin-bottom:4px;">Transaction Hash (TxID) / Escrow Contract ID *</label>
+                    <input type="text" id="pvCryptoTxHash" placeholder="e.g. 0x71c...892e" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border-subtle);border-radius:8px;padding:10px 14px;color:#fff;">
+                  </div>
+                </div>
+
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;font-size:12px;color:var(--text-muted);">
+                  <span style="color:var(--emerald);font-size:16px;">🔒</span>
+                  <span>256-Bit SSL Encrypted Escrow. Verification simulation authenticated via BlazeByte Secure Protocol.</span>
+                </div>
+
+                <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                  <button class="btn btn-primary" id="pvSubmitBtn" type="submit" style="flex:1;min-height:52px;font-size:15px;">
+                    Verify &amp; Authorize 50% Deposit
+                  </button>
+                  <button class="btn btn-outline" id="pvBackBtn" type="button" style="min-height:52px;padding:0 20px;font-size:14px;">
+                    Back to Scope
+                  </button>
+                </div>
+
+                <p class="enquiry-status" id="pvStatus" aria-live="polite" style="margin-top:14px;"></p>
+              </form>
             </div>
 
             <form id="internationalEnquiryForm">
@@ -415,34 +582,51 @@
   </main>
 
   <!-- Global Footer -->
+    <!-- Global Footer -->
+    <!-- Global Footer -->
   <footer class="site-footer">
     <div class="wrap">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a class="brand-link" href="index.html">
+          <a class="brand-link" href="index.html" aria-label="BlazeByte Studio Home">
             <img src="assets/blazebyte-logo.png" alt="BlazeByte Studio Logo">
             <span>BLAZEBYTE STUDIO</span>
           </a>
-          <p>Global digital solutions and technology partner. We engineer high-performance websites, performance marketing campaigns, intelligent AI agents, and custom application software.</p>
+          <p>
+            Global digital solutions and technology partner. We engineer high-performance websites, performance marketing campaigns, intelligent AI agents, and custom application software.
+          </p>
+          <div class="footer-hq-badge">
+            <span class="dot"></span>
+            <span>HQ: Coimbatore, Tamil Nadu, India &bull; Serving Global Markets</span>
+          </div>
+          <div class="footer-contacts" style="margin-top:14px;display:flex;flex-direction:column;gap:8px;font-size:13px;">
+            <a href="mailto:blazebytestudio7@gmail.com" style="color:var(--cyan);text-decoration:none;display:inline-flex;align-items:center;gap:6px;"><span aria-hidden="true">✉</span> blazebytestudio7@gmail.com</a>
+            <a href="tel:+917708795342" style="color:#cbd5e1;text-decoration:none;display:inline-flex;align-items:center;gap:6px;"><span aria-hidden="true">☎</span> +91 77087 95342</a>
+          </div>
         </div>
+
         <div class="footer-col">
           <h4>Four Divisions</h4>
           <ul class="footer-links">
             <li><a href="web-development.html">Web Development</a></li>
             <li><a href="digital-marketing.html">Digital Marketing</a></li>
             <li><a href="ai-solutions.html">AI Solutions</a></li>
+            <li><a href="ai-chatbots.html">AI Chatbots Showcase</a></li>
             <li><a href="custom-applications.html">Custom Applications</a></li>
           </ul>
         </div>
+
         <div class="footer-col">
-          <h4>Company</h4>
+          <h4>Company &amp; Work</h4>
           <ul class="footer-links">
             <li><a href="about.html">About Us</a></li>
-            <li><a href="our-work.html">Our Work</a></li>
-            <li><a href="pricing.html">Pricing Hub</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="our-work.html">Verified Portfolio</a></li>
+            <li><a href="solutions.html">Industries &amp; Solutions</a></li>
+            <li><a href="pricing.html">Global Pricing Hub</a></li>
+            <li><a href="contact.html">Project Consultation</a></li>
           </ul>
         </div>
+
         <div class="footer-col">
           <h4>Legal &amp; Trust</h4>
           <ul class="footer-links">
@@ -454,9 +638,10 @@
           </ul>
         </div>
       </div>
+
       <div class="footer-bottom">
         <div>&copy; 2026 BlazeByte Studio. All rights reserved. &bull; <a href="privacy-policy.html" style="color:var(--text-muted);">Privacy</a> &bull; <a href="terms-of-service.html" style="color:var(--text-muted);">Terms</a> &bull; <a href="refund-policy.html" style="color:var(--text-muted);">Refunds</a> &bull; <a href="cookie-policy.html" style="color:var(--text-muted);">Cookies</a> &bull; <a href="#" id="openFooterCookieSettings" style="color:var(--cyan);">Cookie Settings</a> &bull; <a href="sitemap.xml" style="color:var(--text-muted);">Sitemap</a></div>
-        <div class="footer-markets">Serving International Clients Globally</div>
+        <div class="footer-markets">Target Markets: USA &bull; UK &bull; Canada &bull; Australia &bull; UAE &bull; Europe &bull; Worldwide</div>
       </div>
     </div>
   </footer>

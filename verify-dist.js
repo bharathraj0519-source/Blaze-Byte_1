@@ -18,7 +18,8 @@ const PAGES = [
   'privacy-policy.html',
   'terms-of-service.html',
   'refund-policy.html',
-  'cookie-policy.html'
+  'cookie-policy.html',
+  '404.html'
 ];
 
 console.log('--- Verifying Dist Deployment Package ---');

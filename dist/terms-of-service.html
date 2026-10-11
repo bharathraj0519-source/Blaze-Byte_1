@@ -26,6 +26,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lateef:wght@400;500;600;700;800&family=Rajdhani:wght@500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="alternate icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="assets/blazebyte-logo.png">
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/chatbot.css">
 
@@ -48,9 +50,11 @@
 <body>
 
   <!-- Site Header -->
+    <!-- Site Header with International Mega-Dropdown -->
+    <!-- Site Header with International Mega-Dropdown -->
   <header class="site-header">
     <div class="wrap nav-inner">
-      <a class="brand-link" href="index.html">
+      <a class="brand-link" href="index.html" aria-label="BlazeByte Studio Home">
         <img src="assets/blazebyte-logo.png" alt="BlazeByte Studio Logo">
         <div>
           <span>BLAZEBYTE STUDIO</span>
@@ -77,30 +81,30 @@
                 <div class="dropdown-icon" style="color:var(--emerald)">↗</div>
                 <div class="dropdown-info">
                   <strong>Digital Marketing</strong>
-                  <p>Measurable campaigns, technical SEO &amp; performance ads.</p>
-                  <span class="price-tag">From $249/month</span>
+                  <p>Data-driven SEO, PPC ads, and social media growth.</p>
+                  <span class="price-tag">Starting at $249/mo</span>
                 </div>
               </a>
               <a class="dropdown-service-card" href="ai-solutions.html">
-                <div class="dropdown-icon" style="color:var(--violet)">⚡</div>
+                <div class="dropdown-icon" style="color:var(--violet)">✦</div>
                 <div class="dropdown-info">
-                  <strong>AI Solutions</strong>
-                  <p>Autonomous agents, custom chatbots &amp; workflows.</p>
-                  <span class="price-tag">From $149 setup</span>
+                  <strong>AI Solutions &amp; Chatbots</strong>
+                  <p>Intelligent customer agents and autonomous workflows.</p>
+                  <span class="price-tag">Starting at $149 setup</span>
                 </div>
               </a>
               <a class="dropdown-service-card" href="custom-applications.html">
-                <div class="dropdown-icon" style="color:var(--amber)">⚙</div>
+                <div class="dropdown-icon" style="color:var(--amber)">⚡</div>
                 <div class="dropdown-info">
                   <strong>Custom Applications</strong>
-                  <p>Bespoke web apps, SaaS dashboards &amp; mobile software.</p>
-                  <span class="price-tag">From $499</span>
+                  <p>Bespoke dashboards, CRMs, SaaS MVPs, and mobile apps.</p>
+                  <span class="price-tag">Starting at $499</span>
                 </div>
               </a>
             </div>
           </li>
 
-          <li class="nav-item"><a class="nav-link" href="ai-solutions.html">AI Solutions</a></li>
+          <li class="nav-item"><a class="nav-link" href="solutions.html">Solutions</a></li>
           <li class="nav-item"><a class="nav-link" href="our-work.html">Our Work</a></li>
           <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
@@ -108,8 +112,9 @@
         </ul>
       </nav>
 
-      <div class="header-cta">
-        <a class="btn btn-primary" href="contact.html">Start Project</a>
+      <div class="nav-actions">
+        <a class="btn btn-primary" href="contact.html" style="min-height:44px;padding:0 20px;font-size:14px;">Start Project</a>
+        <button class="mobile-nav-toggle" type="button" aria-label="Toggle Navigation Menu">☰</button>
       </div>
     </div>
   </header>
@@ -195,11 +200,13 @@
   </main>
 
   <!-- Site Footer -->
+    <!-- Global Footer -->
+    <!-- Global Footer -->
   <footer class="site-footer">
     <div class="wrap">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a class="brand-link" href="index.html">
+          <a class="brand-link" href="index.html" aria-label="BlazeByte Studio Home">
             <img src="assets/blazebyte-logo.png" alt="BlazeByte Studio Logo">
             <span>BLAZEBYTE STUDIO</span>
           </a>
@@ -209,6 +216,10 @@
           <div class="footer-hq-badge">
             <span class="dot"></span>
             <span>HQ: Coimbatore, Tamil Nadu, India &bull; Serving Global Markets</span>
+          </div>
+          <div class="footer-contacts" style="margin-top:14px;display:flex;flex-direction:column;gap:8px;font-size:13px;">
+            <a href="mailto:blazebytestudio7@gmail.com" style="color:var(--cyan);text-decoration:none;display:inline-flex;align-items:center;gap:6px;"><span aria-hidden="true">✉</span> blazebytestudio7@gmail.com</a>
+            <a href="tel:+917708795342" style="color:#cbd5e1;text-decoration:none;display:inline-flex;align-items:center;gap:6px;"><span aria-hidden="true">☎</span> +91 77087 95342</a>
           </div>
         </div>
 
@@ -224,12 +235,12 @@
         </div>
 
         <div class="footer-col">
-          <h4>Company &amp; Trust</h4>
+          <h4>Company &amp; Work</h4>
           <ul class="footer-links">
             <li><a href="about.html">About Us</a></li>
             <li><a href="our-work.html">Verified Portfolio</a></li>
+            <li><a href="solutions.html">Industries &amp; Solutions</a></li>
             <li><a href="pricing.html">Global Pricing Hub</a></li>
-            <li><a href="security.html">Security &amp; Trust Center</a></li>
             <li><a href="contact.html">Project Consultation</a></li>
           </ul>
         </div>
