@@ -73,7 +73,7 @@ copyDir(path.join(ROOT_DIR, 'assets'), path.join(DIST_DIR, 'assets'));
 if (fs.existsSync(path.join(ROOT_DIR, '.well-known'))) {
   copyDir(path.join(ROOT_DIR, '.well-known'), path.join(DIST_DIR, '.well-known'));
 }
-['.htaccess', 'security.txt', 'supabase-schema.sql', 'LEGAL_LICENSES.md', 'favicon.ico'].forEach(f => {
+['.htaccess', 'security.txt', 'supabase-schema.sql', 'LEGAL_LICENSES.md', 'favicon.ico', 'google583aea9356961634.html'].forEach(f => {
   const p = path.join(ROOT_DIR, f);
   if (fs.existsSync(p)) fs.copyFileSync(p, path.join(DIST_DIR, f));
 });

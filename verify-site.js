@@ -24,7 +24,8 @@ const PAGES = [
   'sitemap.xml',
   'robots.txt',
   '.well-known/security.txt',
-  'security.txt'
+  'security.txt',
+  'google583aea9356961634.html'
 ];
 
 function fetchUrl(urlPath) {
